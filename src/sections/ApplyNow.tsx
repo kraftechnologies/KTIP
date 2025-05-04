@@ -185,7 +185,7 @@ const ApplyNow = () => {
                     name="domain"
                     value={formData.domain}
                     onChange={handleChange}
-                    className={`${baseFieldStyles}  ${
+                    className={`${baseFieldStyles} border border-neutral-500 ${
                       errors.domain
                         ? "border-red-500 focus:ring-red-200"
                         : "border-gray-300 focus:ring-[#18cb96]/20 focus:border-[#18cb96]"
@@ -265,7 +265,7 @@ const ApplyNow = () => {
                   name="address"
                   value={formData.address}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 transition-all bg-neutral-700 border border-neutral-700 text-white ${
+                  className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 transition-all bg-neutral-700  border-neutral-500 text-white ${
                     errors.address
                       ? "border-red-500 focus:ring-red-200"
                       : "border-gray-300 focus:ring-[#18cb96]/20 focus:border-[#18cb96]"
@@ -291,7 +291,7 @@ const ApplyNow = () => {
                     name="city"
                     value={formData.city}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 transition-all bg-neutral-700 border border-neutral-700 ${
+                    className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 transition-all bg-neutral-700 border border-neutral-500 text-white ${
                       errors.city
                         ? "border-red-500 focus:ring-red-200"
                         : "border-gray-300 focus:ring-[#18cb96]/20 focus:border-[#18cb96]"
@@ -316,7 +316,7 @@ const ApplyNow = () => {
                     name="state"
                     value={formData.state}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 transition-all bg-neutral-700 border border-neutral-700 text-white ${
+                    className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 transition-all bg-neutral-700 border border-neutral-500 text-white ${
                       errors.state
                         ? "border-red-500 focus:ring-red-200"
                         : "border-gray-300 focus:ring-[#18cb96]/20 focus:border-[#18cb96]"
@@ -341,7 +341,7 @@ const ApplyNow = () => {
                     name="country"
                     value={formData.country}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 transition-all bg-neutral-700 border border-neutral-700 text-white ${
+                    className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 transition-all bg-neutral-700 border border-neutral-500 text-white ${
                       errors.country
                         ? "border-red-500 focus:ring-red-200"
                         : "border-gray-300 focus:ring-[#18cb96]/20 focus:border-[#18cb96]"
@@ -369,7 +369,7 @@ const ApplyNow = () => {
                   name="aadharCardNo"
                   value={formData.aadharCardNo}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 transition-all bg-neutral-700 border border-neutral-700 text-white ${
+                  className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 transition-all bg-neutral-700 border border-neutral-500 text-white ${
                     errors.aadharCardNo
                       ? "border-red-500 focus:ring-red-200"
                       : "border-gray-300 focus:ring-[#18cb96]/20 focus:border-[#18cb96]"
@@ -396,7 +396,7 @@ const ApplyNow = () => {
                   name="linkedIn"
                   value={formData.linkedIn}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 transition-all bg-neutral-700 border border-neutral-700 text-white ${
+                  className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 transition-all bg-neutral-700 border border-neutral-500 text-white ${
                     errors.linkedIn
                       ? "border-red-500 focus:ring-red-200"
                       : "border-gray-300 focus:ring-[#18cb96]/20 focus:border-[#18cb96]"
@@ -421,7 +421,7 @@ const ApplyNow = () => {
                   name="skills"
                   value={formData.skills}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 transition-all bg-neutral-700 border border-neutral-700 text-white ${
+                  className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 transition-all bg-neutral-700 border border-neutral-500 text-white ${
                     errors.skills
                       ? "border-red-500 focus:ring-red-200"
                       : "border-gray-300 focus:ring-[#18cb96]/20 focus:border-[#18cb96]"
@@ -446,7 +446,7 @@ const ApplyNow = () => {
                   name="aadharImage"
                   accept="image/*"
                   onChange={(e) => handleFileChange(e, "aadharImage")}
-                  className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 transition-all  bg-neutral-700 border border-neutral-700 text-white ${
+                  className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 transition-all  bg-neutral-700 border border-neutral-500 text-white ${
                     errors.aadharImage
                       ? "border-red-500 focus:ring-red-200"
                       : "border-gray-300 focus:ring-[#18cb96]/20 focus:border-[#18cb96]"
@@ -472,7 +472,7 @@ const ApplyNow = () => {
                   name="resume"
                   accept=".pdf,.doc,.docx"
                   onChange={(e) => handleFileChange(e, "resume")}
-                  className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 transition-all  bg-neutral-700 border border-neutral-700  text-white ${
+                  className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 transition-all  bg-neutral-700 border border-neutral-500  text-white ${
                     errors.resume
                       ? "border-red-500 focus:ring-red-200"
                       : "border-gray-300 focus:ring-[#18cb96]/20 focus:border-[#18cb96]"
@@ -517,12 +517,12 @@ const ApplyNow = () => {
               {/* Terms & Conditions Modal */}
               {showTermsModal && (
                 <div className="fixed inset-0 bg-gray-700 bg-opacity-50 flex justify-center items-center z-50">
-                  <div className="bg-white p-8 rounded-lg max-w-md w-full">
-                    <h3 className="text-lg font-bold mb-4">
+                  <div className="bg-neutral-700 p-8 rounded-lg max-w-md w-full border border-neutral-500">
+                    <h3 className="text-lg font-bold mb-4 text-white">
                       Terms & Conditions
                     </h3>
                     {/* demo terms and conditions of kraf technolagies */}
-                    <p className="text-sm text-gray-700 mb-4">
+                    <p className="text-sm text-white mb-4">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                       Vivamus lacinia, sem sit amet gravida vehicula, dui lectus
                       tempor urna, ac tincidunt purus mi vitae elit.
@@ -543,7 +543,7 @@ const ApplyNow = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`bg-neutral-700 text-[#18cb96] px-8 py-3 rounded-md text-lg font-medium transition-all flex items-center justify-center mx-auto ${
+                  className={`bg-neutral-700 text-[#18cb96] px-8 py-3 rounded-md text-lg font-medium transition-all flex items-center justify-center mx-auto border border-[#18cb96] ${
                     isSubmitting
                       ? "opacity-70 cursor-not-allowed"
                       : "hover:bg-opacity-90 shadow-md hover:shadow-lg"
