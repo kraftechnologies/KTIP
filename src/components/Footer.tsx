@@ -1,8 +1,29 @@
+// Footer.tsx
 import React from 'react';
-import { Layers, Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import {
+  Layers,
+  Mail,
+  Phone,
+  MapPin,
+  Facebook,
+  Twitter,
+  Linkedin,
+  Instagram,
+} from 'lucide-react';
 
-const Footer = () => {
+const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
+
+  // Define quick links as name + href
+  const quickLinks = [
+    { name: 'About', href: '/#about' },
+    { name: 'Program Highlights', href: '/#highlights' },
+    { name: 'Why Choose KTIP', href: '/#why-ktip' },
+    { name: 'Application Process', href: '/#process' },
+    { name: 'Testimonials', href: '/#testimonials' },
+    { name: 'FAQ', href: '/#faq' },
+    { name: 'Contact', href: '/contactform' },
+  ];
 
   return (
     <footer className="bg-black text-white pt-16 pb-8">
@@ -19,31 +40,50 @@ const Footer = () => {
               Kraf Technologies Internship Program empowers students with real-world experience in cutting-edge technologies.
             </p>
             <div className="flex space-x-4">
-              <a href="https://facebook.com/kraftechnologies" className="text-gray-400 hover:text-[#18cb96] transition-colors">
+              <a
+                href="https://facebook.com/kraftechnologies"
+                className="text-gray-400 hover:text-[#18cb96] transition-colors"
+                aria-label="Facebook"
+              >
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="https://x.com/kraftechnologies" className="text-gray-400 hover:text-[#18cb96] transition-colors">
+              <a
+                href="https://x.com/kraftechnologies"
+                className="text-gray-400 hover:text-[#18cb96] transition-colors"
+                aria-label="Twitter"
+              >
                 <Twitter className="w-5 h-5" />
               </a>
-              <a href="https://www.linkedin.com/company/kraftechnologies/?viewAsMember=true" className="text-gray-400 hover:text-[#18cb96] transition-colors">
+              <a
+                href="https://www.linkedin.com/company/kraftechnologies/?viewAsMember=true"
+                className="text-gray-400 hover:text-[#18cb96] transition-colors"
+                aria-label="LinkedIn"
+              >
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a href="https://instagram.com/kraftechnologies" className="text-gray-400 hover:text-[#18cb96] transition-colors">
+              <a
+                href="https://instagram.com/kraftechnologies"
+                className="text-gray-400 hover:text-[#18cb96] transition-colors"
+                aria-label="Instagram"
+              >
                 <Instagram className="w-5 h-5" />
               </a>
             </div>
           </div>
 
-          {/* Column 2 */}
+          {/* Column 2: Quick Links */}
           <div>
             <h3 className="text-lg font-semibold mb-6 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-12 after:bg-[#18cb96]">
               Quick Links
             </h3>
             <ul className="space-y-3">
-              {['About', 'Program Highlights', 'Why Choose KTIP', 'Application Process', 'Testimonials', 'FAQ', 'Contact'].map((item) => (
-                <li key={item}>
-                  <a href={`#${item.toLowerCase().replace(/\s+/g, '-')}`} className="text-gray-400 hover:text-[#18cb96] transition-colors">
-                    {item}
+              {quickLinks.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className="text-gray-400 hover:text-[#18cb96] transition-colors"
+                  >
+                    {link.name}
                   </a>
                 </li>
               ))}
@@ -58,15 +98,25 @@ const Footer = () => {
             <ul className="space-y-4">
               <li className="flex">
                 <MapPin className="w-5 h-5 mr-3 text-[#18cb96] flex-shrink-0" />
-                <span className="text-gray-400">Property No. 55, 3rd Floor Saidulajab, Near Westend, Marg Lane-2, New Delhi, 110030</span>
+                <span className="text-gray-400">
+                  Property No. 55, 3rd Floor Saidulajab, Near Westend, Marg
+                  Lane-2, New Delhi, 110030
+                </span>
               </li>
               <li className="flex">
                 <Phone className="w-5 h-5 mr-3 text-[#18cb96] flex-shrink-0" />
-                <a href="tel:+919670269295" className="text-gray-400">+91-9670269295</a>
+                <a href="tel:+919670269295" className="text-gray-400">
+                  +91-9670269295
+                </a>
               </li>
               <li className="flex">
                 <Mail className="w-5 h-5 mr-3 text-[#18cb96] flex-shrink-0" />
-                <a href="mailto:info@kraftechnologies.com" className="text-gray-400">info@kraftechnologies.com</a>
+                <a
+                  href="mailto:info@kraftechnologies.com"
+                  className="text-gray-400"
+                >
+                  info@kraftechnologies.com
+                </a>
               </li>
             </ul>
           </div>
@@ -111,8 +161,8 @@ const Footer = () => {
           </div>
 
           {/* Right side with Cashfree logo */}
-          <div className="flex flex-row items-center"> {/* Reduced gap from gap-2 to gap-1 */}
-            <p className="text-sm">Payment Partner</p>
+          <div className="flex items-center">
+            <p className="text-sm mr-2">Payment Partner</p>
             <img
               src="https://storage.googleapis.com/datanyze-data//technologies/a146b015e8eb3e923b4d285d5c1dc972f7f513de.png"
               alt="Cashfree"
