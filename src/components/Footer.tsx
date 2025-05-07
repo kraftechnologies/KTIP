@@ -19,16 +19,16 @@ const Footer = () => {
               Kraf Technologies Internship Program empowers students with real-world experience in cutting-edge technologies.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-[#18cb96] transition-colors">
+              <a href="https://facebook.com/kraftechnologies" className="text-gray-400 hover:text-[#18cb96] transition-colors">
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-[#18cb96] transition-colors">
+              <a href="https://x.com/kraftechnologies" className="text-gray-400 hover:text-[#18cb96] transition-colors">
                 <Twitter className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-[#18cb96] transition-colors">
+              <a href="https://www.linkedin.com/company/kraftechnologies/?viewAsMember=true" className="text-gray-400 hover:text-[#18cb96] transition-colors">
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-[#18cb96] transition-colors">
+              <a href="https://instagram.com/kraftechnologies" className="text-gray-400 hover:text-[#18cb96] transition-colors">
                 <Instagram className="w-5 h-5" />
               </a>
             </div>
@@ -58,15 +58,15 @@ const Footer = () => {
             <ul className="space-y-4">
               <li className="flex">
                 <MapPin className="w-5 h-5 mr-3 text-[#18cb96] flex-shrink-0" />
-                <span className="text-gray-400">Kraf Technologies, Tech Park, Bangalore, India</span>
+                <span className="text-gray-400">Property No. 55, 3rd Floor Saidulajab, Near Westend, Marg Lane-2, New Delhi, 110030</span>
               </li>
               <li className="flex">
                 <Phone className="w-5 h-5 mr-3 text-[#18cb96] flex-shrink-0" />
-                <span className="text-gray-400">+91 98765 43210</span>
+                <a href="tel:+919670269295" className="text-gray-400">+91-9670269295</a>
               </li>
               <li className="flex">
                 <Mail className="w-5 h-5 mr-3 text-[#18cb96] flex-shrink-0" />
-                <span className="text-gray-400">info@kraf-technologies.com</span>
+                <a href="mailto:info@kraftechnologies.com" className="text-gray-400">info@kraftechnologies.com</a>
               </li>
             </ul>
           </div>
