@@ -1,0 +1,105 @@
+import React, { useEffect, useRef } from "react";
+
+interface Student {
+  id: number;
+  name: string;
+  attendance: number;
+  sessions: number[];
+}
+
+interface AttendanceChartProps {
+  attendanceData: Student[];
+}
+
+const AttendanceChart: React.FC<AttendanceChartProps> = ({ attendanceData }) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    if (!canvasRef.current || attendanceData.length === 0) return;
+
+    const ctx = canvasRef.current.getContext("2d");
+    if (!ctx) return;
+
+    // Clear canvas
+    ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+
+    // Chart dimensions
+    const chartWidth = canvasRef.current.width - 60;
+    const chartHeight = canvasRef.current.height - 60;
+    const barWidth = Math.min(40, chartWidth / attendanceData.length - 10);
+    const spacing = (chartWidth - barWidth * attendanceData.length) / (attendanceData.length + 1);
+
+    // Draw axes
+    ctx.beginPath();
+    ctx.strokeStyle = "#666";
+    ctx.lineWidth = 2;
+    ctx.moveTo(40, 20);
+    ctx.lineTo(40, chartHeight + 30);
+    ctx.lineTo(chartWidth + 50, chartHeight + 30);
+    ctx.stroke();
+
+    // Draw y-axis labels (0-100%)
+    ctx.fillStyle = "#ccc";
+    ctx.font = "12px Arial";
+    ctx.textAlign = "right";
+    for (let i = 0; i <= 100; i += 20) {
+      const y = chartHeight + 30 - (i / 100) * chartHeight;
+      ctx.fillText(i + "%", 35, y + 5);
+      
+      // Draw horizontal grid lines
+      ctx.beginPath();
+      ctx.strokeStyle = "#444";
+      ctx.lineWidth = 0.5;
+      ctx.moveTo(40, y);
+      ctx.lineTo(chartWidth + 50, y);
+      ctx.stroke();
+    }
+
+    // Draw bars
+    attendanceData.forEach((student, index) => {
+      const x = 40 + spacing + (barWidth + spacing) * index;
+      const barHeight = (student.attendance / 100) * chartHeight;
+      const y = chartHeight + 30 - barHeight;
+
+      // Draw bar
+      ctx.fillStyle = "#18cb96";
+      ctx.fillRect(x, y, barWidth, barHeight);
+
+      // Draw student name
+      ctx.fillStyle = "#ccc";
+      ctx.font = "10px Arial";
+      ctx.textAlign = "center";
+      ctx.save();
+      ctx.translate(x + barWidth / 2, chartHeight + 45);
+      ctx.rotate(-Math.PI / 4);
+      ctx.fillText(student.name.substring(0, 12), 0, 0);
+      ctx.restore();
+    });
+
+    // Draw chart title
+    ctx.fillStyle = "#fff";
+    ctx.font = "14px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("Student Attendance Percentage", canvasRef.current.width / 2, 15);
+
+  }, [attendanceData]);
+
+  return (
+    <div className="w-full h-full flex justify-center">
+      {attendanceData.length > 0 ? (
+        <canvas 
+          ref={canvasRef} 
+          width={500} 
+          height={300} 
+          className="max-w-full"
+        />
+      ) : (
+        <div className="flex items-center justify-center h-64 text-white">
+          No attendance data available
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default AttendanceChart;

@@ -9,6 +9,8 @@ import { useEffect } from "react";
 import ContactForm from "./sections/ContactForm";
 import LearnMore from "./components/LearnMore";
 import ContactTeam from "./components/ContactTeam";
+import AttendancePage from "./components/AttendancePage";
+
 function App() {
   useEffect(() => {
     document.documentElement.classList.add("dark");
@@ -23,6 +25,7 @@ function App() {
           <Route path="/contactform" element={<ContactForm />} />
           <Route path="/contact" element={<ContactTeam />} />
           <Route path="/learn-more" element={<LearnMore />} />
+          <Route path="/attendance" element={<AttendancePage />} />
           <Route path="*" element={<ConstructionPage />} />
         </Routes>
       </main>
