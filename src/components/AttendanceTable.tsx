@@ -1,6 +1,6 @@
 import React from "react";
 
-interface Student {
+interface Subject {
   id: number;
   name: string;
   attendance: number;
@@ -8,7 +8,7 @@ interface Student {
 }
 
 interface AttendanceTableProps {
-  attendanceData: Student[];
+  attendanceData: Subject[];
 }
 
 const AttendanceTable: React.FC<AttendanceTableProps> = ({ attendanceData }) => {
@@ -18,7 +18,7 @@ const AttendanceTable: React.FC<AttendanceTableProps> = ({ attendanceData }) => 
         <thead>
           <tr>
             <th className="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-              Name
+              Subject
             </th>
             <th className="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
               Attendance %
@@ -30,25 +30,25 @@ const AttendanceTable: React.FC<AttendanceTableProps> = ({ attendanceData }) => 
         </thead>
         <tbody className="divide-y divide-neutral-700">
           {attendanceData.length > 0 ? (
-            attendanceData.map((student) => (
-              <tr key={student.id}>
+            attendanceData.map((subject) => (
+              <tr key={subject.id}>
                 <td className="px-4 py-3 whitespace-nowrap text-sm text-white">
-                  {student.name}
+                  {subject.name}
                 </td>
                 <td className="px-4 py-3 whitespace-nowrap">
                   <div className="flex items-center">
                     <div className="w-full bg-neutral-600 rounded-full h-2.5 mr-2">
                       <div
                         className="bg-[#18cb96] h-2.5 rounded-full"
-                        style={{ width: `${student.attendance}%` }}
+                        style={{ width: `${subject.attendance}%` }}
                       ></div>
                     </div>
-                    <span className="text-sm text-white">{student.attendance}%</span>
+                    <span className="text-sm text-white">{subject.attendance}%</span>
                   </div>
                 </td>
                 <td className="px-4 py-3 whitespace-nowrap text-sm text-white">
                   <div className="flex space-x-1">
-                    {student.sessions.map((session, index) => (
+                    {subject.sessions.map((session, index) => (
                       <div
                         key={index}
                         className={`w-4 h-4 rounded-full ${
