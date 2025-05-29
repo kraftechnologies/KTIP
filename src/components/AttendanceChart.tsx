@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
-interface Student {
+interface Subject {
   id: number;
   name: string;
   attendance: number;
@@ -8,7 +8,7 @@ interface Student {
 }
 
 interface AttendanceChartProps {
-  attendanceData: Student[];
+  attendanceData: Subject[];
 }
 
 const AttendanceChart: React.FC<AttendanceChartProps> = ({ attendanceData }) => {
@@ -56,23 +56,23 @@ const AttendanceChart: React.FC<AttendanceChartProps> = ({ attendanceData }) => 
     }
 
     // Draw bars
-    attendanceData.forEach((student, index) => {
+    attendanceData.forEach((subject, index) => {
       const x = 40 + spacing + (barWidth + spacing) * index;
-      const barHeight = (student.attendance / 100) * chartHeight;
+      const barHeight = (subject.attendance / 100) * chartHeight;
       const y = chartHeight + 30 - barHeight;
 
       // Draw bar
       ctx.fillStyle = "#18cb96";
       ctx.fillRect(x, y, barWidth, barHeight);
 
-      // Draw student name
+      // Draw subject name
       ctx.fillStyle = "#ccc";
       ctx.font = "10px Arial";
       ctx.textAlign = "center";
       ctx.save();
       ctx.translate(x + barWidth / 2, chartHeight + 45);
       ctx.rotate(-Math.PI / 4);
-      ctx.fillText(student.name.substring(0, 12), 0, 0);
+      ctx.fillText(subject.name.substring(0, 12), 0, 0);
       ctx.restore();
     });
 
@@ -80,7 +80,7 @@ const AttendanceChart: React.FC<AttendanceChartProps> = ({ attendanceData }) => 
     ctx.fillStyle = "#fff";
     ctx.font = "14px Arial";
     ctx.textAlign = "center";
-    ctx.fillText("Student Attendance Percentage", canvasRef.current.width / 2, 15);
+    ctx.fillText("Subject Attendance Percentage", canvasRef.current.width / 2, 15);
 
   }, [attendanceData]);
 
