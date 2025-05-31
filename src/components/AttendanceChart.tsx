@@ -31,7 +31,7 @@ const AttendanceChart: React.FC<AttendanceChartProps> = ({ attendanceData }) => 
 
     // Draw axes
     ctx.beginPath();
-    ctx.strokeStyle = "#9CA3AF"; // gray-400
+    ctx.strokeStyle = "#D0D5DD"; // Light gray for axes
     ctx.lineWidth = 2;
     ctx.moveTo(40, 20);
     ctx.lineTo(40, chartHeight + 30);
@@ -39,7 +39,7 @@ const AttendanceChart: React.FC<AttendanceChartProps> = ({ attendanceData }) => 
     ctx.stroke();
 
     // Draw y-axis labels (0-100%)
-    ctx.fillStyle = "#6B7280"; // gray-500
+    ctx.fillStyle = "#667085"; // Text color from Figma
     ctx.font = "12px Inter, sans-serif";
     ctx.textAlign = "right";
     for (let i = 0; i <= 100; i += 20) {
@@ -48,7 +48,7 @@ const AttendanceChart: React.FC<AttendanceChartProps> = ({ attendanceData }) => 
       
       // Draw horizontal grid lines
       ctx.beginPath();
-      ctx.strokeStyle = "#E5E7EB"; // gray-200
+      ctx.strokeStyle = "#EAECF0"; // Very light gray for grid lines
       ctx.lineWidth = 0.5;
       ctx.moveTo(40, y);
       ctx.lineTo(chartWidth + 50, y);
@@ -61,34 +61,33 @@ const AttendanceChart: React.FC<AttendanceChartProps> = ({ attendanceData }) => 
       const barHeight = (subject.attendance / 100) * chartHeight;
       const y = chartHeight + 30 - barHeight;
 
+      // Get bar color based on attendance
+      let barColor;
+      if (subject.attendance >= 90) {
+        barColor = "#12B76A"; // Green
+      } else if (subject.attendance >= 75) {
+        barColor = "#7F56D9"; // Purple
+      } else if (subject.attendance >= 60) {
+        barColor = "#F79009"; // Yellow/Orange
+      } else {
+        barColor = "#F04438"; // Red
+      }
+      
       // Draw bar with gradient
       const gradient = ctx.createLinearGradient(x, y, x, chartHeight + 30);
-      
-      // Set gradient colors based on attendance
-      if (subject.attendance >= 90) {
-        gradient.addColorStop(0, "#10B981"); // green-500
-        gradient.addColorStop(1, "#34D399"); // green-400
-      } else if (subject.attendance >= 75) {
-        gradient.addColorStop(0, "#3B82F6"); // blue-500
-        gradient.addColorStop(1, "#60A5FA"); // blue-400
-      } else if (subject.attendance >= 60) {
-        gradient.addColorStop(0, "#F59E0B"); // yellow-500
-        gradient.addColorStop(1, "#FBBF24"); // yellow-400
-      } else {
-        gradient.addColorStop(0, "#EF4444"); // red-500
-        gradient.addColorStop(1, "#F87171"); // red-400
-      }
+      gradient.addColorStop(0, barColor);
+      gradient.addColorStop(1, barColor + "CC"); // Add some transparency
       
       ctx.fillStyle = gradient;
       ctx.fillRect(x, y, barWidth, barHeight);
       
-      // Add border to bar
-      ctx.strokeStyle = "#F3F4F6"; // gray-100
+      // Add subtle border to bar
+      ctx.strokeStyle = "#FFFFFF";
       ctx.lineWidth = 1;
       ctx.strokeRect(x, y, barWidth, barHeight);
 
       // Draw subject name
-      ctx.fillStyle = "#6B7280"; // gray-500
+      ctx.fillStyle = "#667085"; // Text color from Figma
       ctx.font = "10px Inter, sans-serif";
       ctx.textAlign = "center";
       ctx.save();
@@ -99,7 +98,7 @@ const AttendanceChart: React.FC<AttendanceChartProps> = ({ attendanceData }) => 
     });
 
     // Draw chart title
-    ctx.fillStyle = "#1F2937"; // gray-800
+    ctx.fillStyle = "#344054"; // Darker text color for title
     ctx.font = "14px Inter, sans-serif";
     ctx.textAlign = "center";
     ctx.fillText("Subject Attendance Percentage", canvasRef.current.width / 2, 15);
@@ -116,7 +115,7 @@ const AttendanceChart: React.FC<AttendanceChartProps> = ({ attendanceData }) => 
           className="max-w-full"
         />
       ) : (
-        <div className="flex items-center justify-center h-64 text-gray-500 dark:text-gray-400">
+        <div className="flex items-center justify-center h-64 text-[#667085]">
           No attendance data available
         </div>
       )}
