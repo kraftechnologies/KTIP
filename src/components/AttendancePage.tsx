@@ -37,28 +37,28 @@ const AttendancePage: React.FC = () => {
   ) / sampleStudentData.enrolledCourses.length;
   
   return (
-    <section className="py-20 bg-white dark:bg-neutral-900">
+    <section className="py-20 bg-gray-50 dark:bg-gray-900">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold mb-3 text-white">My Attendance</h2>
-          <div className="w-20 h-1 bg-[#18cb96] mx-auto mb-6"></div>
-          <p className="text-lg text-white max-w-2xl mx-auto">
+          <h2 className="text-3xl font-bold mb-3 text-gray-800 dark:text-white">My Attendance</h2>
+          <div className="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Track your attendance across different courses and subjects.
           </p>
         </div>
 
         <div className="max-w-6xl mx-auto">
           <div className="mb-8 flex justify-between items-center">
-            <div className="bg-neutral-800 p-4 rounded-md border border-neutral-500">
-              <p className="text-white">
+            <div className="bg-white dark:bg-gray-800 p-4 rounded-md shadow-md">
+              <p className="text-gray-700 dark:text-gray-300">
                 <span className="font-medium">Student:</span>{" "}
-                <span className="text-[#18cb96] font-bold">{sampleStudentData.name}</span>
+                <span className="text-blue-600 font-bold">{sampleStudentData.name}</span>
               </p>
             </div>
-            <div className="bg-neutral-800 p-4 rounded-md border border-neutral-500">
-              <p className="text-white">
+            <div className="bg-white dark:bg-gray-800 p-4 rounded-md shadow-md">
+              <p className="text-gray-700 dark:text-gray-300">
                 <span className="font-medium">Overall Attendance:</span>{" "}
-                <span className="text-[#18cb96] font-bold">{overallAttendance.toFixed(2)}%</span>
+                <span className="text-blue-600 font-bold">{overallAttendance.toFixed(2)}%</span>
               </p>
             </div>
           </div>
@@ -66,23 +66,23 @@ const AttendancePage: React.FC = () => {
           {sampleStudentData.enrolledCourses.map((course) => (
             <div key={course.id} className="mb-12">
               <div className="flex justify-between items-center mb-6">
-                <h3 className="text-2xl font-semibold text-white">{course.name}</h3>
-                <div className="bg-neutral-800 px-4 py-2 rounded-md border border-neutral-500">
-                  <p className="text-white">
+                <h3 className="text-2xl font-semibold text-gray-800 dark:text-white">{course.name}</h3>
+                <div className="bg-white dark:bg-gray-800 px-4 py-2 rounded-md shadow-md">
+                  <p className="text-gray-700 dark:text-gray-300">
                     <span className="font-medium">Course Attendance:</span>{" "}
-                    <span className="text-[#18cb96] font-bold">{course.attendance}%</span>
+                    <span className="text-blue-600 font-bold">{course.attendance}%</span>
                   </p>
                 </div>
               </div>
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-                <div className="bg-neutral-800 p-6 rounded-lg border border-neutral-500 shadow-md">
-                  <h3 className="text-xl font-semibold mb-4 text-white">Attendance Chart</h3>
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+                  <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Attendance Chart</h3>
                   <AttendanceChart attendanceData={course.subjects} />
                 </div>
                 
-                <div className="bg-neutral-800 p-6 rounded-lg border border-neutral-500 shadow-md">
-                  <h3 className="text-xl font-semibold mb-4 text-white">Subject Details</h3>
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+                  <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Subject Details</h3>
                   <AttendanceTable attendanceData={course.subjects} />
                 </div>
               </div>
