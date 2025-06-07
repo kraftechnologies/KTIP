@@ -32,12 +32,11 @@ const Header = () => {
   return (
     <header
       className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-[#121212] shadow-md py-3 " : "bg-[#121212] py-4"
+        scrolled ? "bg-white shadow-md py-3" : "bg-white py-4"
       }`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         {/* Logo */}
-        {/* logo should be changed to make it visible clearly */}
         <div className="flex items-center">
           <img
             src={logo}
@@ -52,10 +51,10 @@ const Header = () => {
             <button
               key={item.label}
               onClick={() => handleNavigation(item.path)}
-              className={`text-sm uppercase tracking-wide font-medium text-white transition-colors ${
-                scrolled
-                  ? "text-gray-700 hover:text-[#18cb96]"
-                  : "text-gray-700 hover:text-[#18cb96]"
+              className={`text-sm uppercase tracking-wide font-medium transition-colors ${
+                item.path === "/attendance" 
+                  ? "text-[#7F56D9] hover:text-[#6941C6]" 
+                  : "text-[#344054] hover:text-[#7F56D9]"
               }`}
             >
               {item.label}
@@ -65,7 +64,7 @@ const Header = () => {
 
         {/* Mobile Toggle Button */}
         <button
-          className="md:hidden text-gray-700"
+          className="md:hidden text-[#344054]"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle Menu"
         >
@@ -85,7 +84,11 @@ const Header = () => {
               <button
                 key={item.label}
                 onClick={() => handleNavigation(item.path)}
-                className="text-sm uppercase text-gray-700 hover:text-[#18cb96] tracking-wide font-medium py-2"
+                className={`text-sm uppercase tracking-wide font-medium py-2 ${
+                  item.path === "/attendance" 
+                    ? "text-[#7F56D9]" 
+                    : "text-[#344054] hover:text-[#7F56D9]"
+                }`}
               >
                 {item.label}
               </button>
