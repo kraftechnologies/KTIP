@@ -34,9 +34,7 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-[#121212] shadow-md py-3 " : "bg-[#121212] py-4"
-      }`}
+      className="fixed w-full z-50 transition-all duration-300 bg-white shadow-md py-3"
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         {/* Logo */}
@@ -54,11 +52,7 @@ const Header = () => {
             <button
               key={item.label}
               onClick={() => handleNavigation(item.path)}
-              className={`text-sm uppercase tracking-wide font-medium text-white transition-colors ${
-                scrolled
-                  ? "text-gray-700 hover:text-[#18cb96]"
-                  : "text-gray-700 hover:text-[#18cb96]"
-              }`}
+              className="text-sm uppercase tracking-wide font-medium text-gray-800 hover:text-[#7B2FF2] transition-colors"
             >
               {item.label}
             </button>
@@ -77,7 +71,7 @@ const Header = () => {
 
         {/* Mobile Toggle Button */}
         <button
-          className="md:hidden text-[#344054]"
+          className="md:hidden text-gray-700"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle Menu"
         >
@@ -97,7 +91,7 @@ const Header = () => {
               <button
                 key={item.label}
                 onClick={() => handleNavigation(item.path)}
-                className="text-sm uppercase text-gray-700 hover:text-[#18cb96] tracking-wide font-medium py-2"
+                className="text-sm uppercase text-gray-800 hover:text-[#7B2FF2] tracking-wide font-medium py-2"
               >
                 {item.label}
               </button>
