@@ -67,18 +67,4 @@ const AttendanceTable = ({ attendanceData }) => {
     </div>
   );
 };
-
-// Function to determine progress bar color based on attendance percentage
-const getProgressColor = (attendance) => {
-  if (attendance >= 90) {
-    return "bg-[#12B76A]"; // Green - Excellent attendance
-  } else if (attendance >= 75) {
-    return "bg-[#7F56D9]"; // Purple - Good attendance
-  } else if (attendance >= 60) {
-    return "bg-[#F79009]"; // Yellow/Orange - Average attendance
-  } else {
-    return "bg-[#F04438]"; // Red - Poor attendance
-  }
-};
-
 export default AttendanceTable;
