@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 
 const Testimonials = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const slidesRef = useRef<HTMLDivElement>(null);
+  const slidesRef = useRef(null);
 
   const testimonials = [
     {
@@ -59,15 +59,15 @@ const Testimonials = () => {
   return (
     <section
       id="testimonials"
-      className="py-20 bg-gray-50 overflow-hidden dark:bg-neutral-900 text-white"
+      className="py-20 bg-white overflow-hidden text-gray-900"
     >
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold mb-3 text-white">
+          <h2 className="text-3xl font-bold mb-3 text-[#7B2FF2]">
             What Our Interns Say
           </h2>
-          <div className="w-20 h-1 bg-[#18cb96] mx-auto mb-6"></div>
-          <p className="text-lg text-white max-w-2xl mx-auto">
+          <div className="w-20 h-1 bg-gradient-to-r from-[#7B2FF2] to-[#22D1EE] mx-auto mb-6"></div>
+          <p className="text-lg text-gray-700 max-w-2xl mx-auto">
             Hear from past participants about their experience with the Kraf
             Technologies Internship Program.
           </p>
@@ -86,26 +86,28 @@ const Testimonials = () => {
                   className="w-full px-4"
                   style={{ flexBasis: `${100 / testimonials.length}%` }}
                 >
-                  <div className="bg-[#121212] border border-neutral-500 rounded-lg shadow-md p-8 md:p-10 flex flex-col md:flex-row items-center">
-                    <div className="mb-6 md:mb-0 md:mr-8 flex-shrink-0">
-                      <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-[#18cb96]">
-                        <img
-                          src={testimonial.image}
-                          alt={testimonial.name}
-                          className="w-full h-full object-cover"
-                        />
+                  <div className="bg-gradient-to-br from-[#7B2FF2] to-[#22D1EE] border border-[#e0d7f8] rounded-lg shadow-md p-1">
+                    <div className="bg-white rounded-lg p-8 md:p-10 flex flex-col md:flex-row items-center">
+                      <div className="mb-6 md:mb-0 md:mr-8 flex-shrink-0">
+                        <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-[#7B2FF2]">
+                          <img
+                            src={testimonial.image}
+                            alt={testimonial.name}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
                       </div>
-                    </div>
-                    <div>
-                      <Quote className="w-10 h-10 text-[#18cb96] opacity-50 mb-4" />
-                      <p className="text-white italic mb-6">
-                        "{testimonial.quote}"
-                      </p>
                       <div>
-                        <h4 className="text-lg font-semibold text-white">
-                          {testimonial.name}
-                        </h4>
-                        <p className="text-white">{testimonial.position}</p>
+                        <Quote className="w-10 h-10 text-[#7B2FF2] opacity-50 mb-4" />
+                        <p className="text-gray-900 italic mb-6">
+                          "{testimonial.quote}"
+                        </p>
+                        <div>
+                          <h4 className="text-lg font-semibold text-[#7B2FF2]">
+                            {testimonial.name}
+                          </h4>
+                          <p className="text-gray-700">{testimonial.position}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -136,7 +138,7 @@ const Testimonials = () => {
                 key={index}
                 onClick={() => setCurrentSlide(index)}
                 className={`w-3 h-3 rounded-full mx-1 transition-all ${
-                  currentSlide === index ? "bg-[#18cb96] w-6" : "bg-gray-300"
+                  currentSlide === index ? "bg-[#7B2FF2] w-6" : "bg-gray-300"
                 }`}
                 aria-label={`Go to testimonial ${index + 1}`}
               ></button>

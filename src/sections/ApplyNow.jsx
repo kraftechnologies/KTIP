@@ -17,13 +17,13 @@ const ApplyNow = () => {
     termsAccepted: false,
   });
 
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showTermsModal, setShowTermsModal] = useState(false);
 
   const validate = () => {
-    const newErrors: Record<string, string> = {};
+    const newErrors = {};
 
     if (!formData.domain) {
       newErrors.domain = "Domain is required";
@@ -66,14 +66,7 @@ const ApplyNow = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<
-      | HTMLInputElement
-      | HTMLTextAreaElement
-      | HTMLSelectElement
-      | HTMLTextAreaElement
-    >
-  ) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -88,10 +81,7 @@ const ApplyNow = () => {
     }
   };
 
-  const handleFileChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    field: "aadharImage" | "resume"
-  ) => {
+  const handleFileChange = (e, field) => {
     const file = e.target.files ? e.target.files[0] : null;
     setFormData((prev) => ({
       ...prev,
@@ -106,7 +96,7 @@ const ApplyNow = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if (validate()) {

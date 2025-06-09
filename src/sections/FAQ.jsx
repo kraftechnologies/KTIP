@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Plus, Minus } from "lucide-react";
 
 const FAQ = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState(null);
 
   const faqs = [
     {
@@ -37,53 +37,50 @@ const FAQ = () => {
     },
   ];
 
-  const toggleAccordion = (index: number) => {
+  const toggleAccordion = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <section id="faq" className="py-20 bg-white dark:bg-neutral-900 text-white">
+    <section id="faq" className="py-20 bg-white text-gray-900">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold mb-3 text-white">
+          <h2 className="text-3xl font-bold mb-3 text-[#7B2FF2]">
             Frequently Asked Questions
           </h2>
-          <div className="w-20 h-1 bg-[#18cb96] mx-auto mb-6"></div>
-          <p className="text-lg text-white max-w-2xl mx-auto">
-            Find answers to common questions about the Kraf Technologies
-            Internship Program.
+          <div className="w-20 h-1 bg-gradient-to-r from-[#7B2FF2] to-[#22D1EE] mx-auto mb-6"></div>
+          <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+            Find answers to common questions about the Kraf Technologies Internship Program.
           </p>
         </div>
-
         <div className="max-w-3xl mx-auto">
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="mb-4 border border-gray-200 rounded-lg overflow-hidden transition-all duration-300"
+              className="mb-4 border border-[#7B2FF2] rounded-lg overflow-hidden transition-all duration-300 bg-white"
             >
               <button
-                className={`flex justify-between items-center w-full p-5 text-left text-gray-800 font-medium focus:outline-none ${
+                className={`flex justify-between items-center w-full p-5 text-left font-medium focus:outline-none bg-white ${
                   openIndex === index
-                    ? "bg-[#121212] border border-neutral-500"
-                    : "bg-[#121212] border border-neutral-500"
+                    ? "border-b-2 border-[#22D1EE]"
+                    : ""
                 }`}
                 onClick={() => toggleAccordion(index)}
                 aria-expanded={openIndex === index}
               >
-                <span className="text-lg text-white">{faq.question}</span>
+                <span className="text-lg text-[#7B2FF2]">{faq.question}</span>
                 {openIndex === index ? (
-                  <Minus className="w-5 h-5 text-[#18cb96] " />
+                  <Minus className="w-5 h-5 text-[#22D1EE] " />
                 ) : (
-                  <Plus className="w-5 h-5 text-[#18cb96]" />
+                  <Plus className="w-5 h-5 text-[#7B2FF2]" />
                 )}
               </button>
-
               <div
                 className={`overflow-hidden transition-all duration-300 ${
                   openIndex === index ? "max-h-96" : "max-h-0"
                 }`}
               >
-                <p className="p-5 pt-0 text-white bg-[#121212]">{faq.answer}</p>
+                <p className="p-5 pt-0 text-gray-700 bg-white">{faq.answer}</p>
               </div>
             </div>
           ))}

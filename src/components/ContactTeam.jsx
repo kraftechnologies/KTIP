@@ -1,9 +1,9 @@
 // pages/ContactTeam.tsx
 import React, { useState, FormEvent } from 'react';
 import { MapPin, Mail, Phone } from 'lucide-react';
-import TeamMemberCard, { TeamMember } from '../sections/TeamMemberCard';
+import TeamMemberCard from '../sections/TeamMemberCard';
 
-const teamMembers: TeamMember[] = [
+const teamMembers = [
   {
     name: 'Ankit Verma',
     role: 'Program Lead',
@@ -30,7 +30,7 @@ const teamMembers: TeamMember[] = [
   },
 ];
 
-const ContactTeam: React.FC = () => {
+const ContactTeam = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -40,12 +40,11 @@ const ContactTeam: React.FC = () => {
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
+    e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     // TODO: hook up to API or email service
     alert(
@@ -56,19 +55,19 @@ const ContactTeam: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white dark:bg-neutral-900">
+    <div className="min-h-screen flex flex-col bg-white">
       <main className="flex-grow">
         {/* Hero */}
         <section
           id="contact-hero"
-          className="relative h-56 md:h-72 flex items-center justify-center text-center bg-gray-50 dark:bg-neutral-800"
+          className="relative h-56 md:h-72 flex items-center justify-center text-center bg-gradient-to-r from-[#7B2FF2] to-[#22D1EE]"
         >
-          <div className="absolute inset-0 bg-[#18cb96] bg-opacity-10 dark:bg-opacity-20" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#7B2FF2] to-[#22D1EE] opacity-10" />
           <div className="relative z-10 px-4">
-            <h1 className="text-2xl md:text-4xl font-bold text-gray-900 dark:text-white">
+            <h1 className="text-2xl md:text-4xl font-bold text-[#000]">
               Contact Our Team
             </h1>
-            <p className="mt-2 text-gray-700 dark:text-gray-300 max-w-xl mx-auto">
+            <p className="mt-2 text-gray-700 max-w-xl mx-auto">
               Have questions? Reach out directly to any of our team members or
               send us a message below.
             </p>
@@ -77,7 +76,7 @@ const ContactTeam: React.FC = () => {
 
         {/* Team Section */}
         <section id="team" className="py-16 px-4 container mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 text-center mb-8">
+          <h2 className="text-3xl font-bold text-[#7B2FF2] text-center mb-8">
             Meet the Team
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -88,14 +87,14 @@ const ContactTeam: React.FC = () => {
         </section>
 
         {/* Contact Form Section */}
-        <section id="contact" className="py-16 px-4 bg-gray-50 dark:bg-neutral-800">
+        <section id="contact" className="py-16 px-4 bg-white">
           <div className="container mx-auto max-w-2xl">
-            <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100 text-center mb-6">
+            <h2 className="text-3xl font-bold text-[#7B2FF2] text-center mb-6">
               Send Us a Message
             </h2>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label className="block text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-[#7B2FF2] mb-1">
                   Your Name
                 </label>
                 <input
@@ -104,11 +103,11 @@ const ContactTeam: React.FC = () => {
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full p-3 rounded-md bg-white dark:bg-neutral-700 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-neutral-600 focus:ring-2 focus:ring-[#18cb96]"
+                  className="w-full p-3 rounded-md bg-white text-gray-900 border border-black focus:ring-2 focus:ring-[#7B2FF2] focus:border-[#7B2FF2]"
                 />
               </div>
               <div>
-                <label className="block text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-[#7B2FF2] mb-1">
                   Your Email
                 </label>
                 <input
@@ -117,18 +116,18 @@ const ContactTeam: React.FC = () => {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full p-3 rounded-md bg-white dark:bg-neutral-700 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-neutral-600 focus:ring-2 focus:ring-[#18cb96]"
+                  className="w-full p-3 rounded-md bg-white text-gray-900 border border-black focus:ring-2 focus:ring-[#7B2FF2] focus:border-[#7B2FF2]"
                 />
               </div>
               <div>
-                <label className="block text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-[#7B2FF2] mb-1">
                   To
                 </label>
                 <select
                   name="to"
                   value={formData.to}
                   onChange={handleChange}
-                  className="w-full p-3 rounded-md bg-white dark:bg-neutral-700 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-neutral-600 focus:ring-2 focus:ring-[#18cb96]"
+                  className="w-full p-3 rounded-md bg-white text-gray-900 border border-black focus:ring-2 focus:ring-[#7B2FF2] focus:border-[#7B2FF2]"
                 >
                   <option value="">General Inquiry</option>
                   {teamMembers.map((m) => (
@@ -139,7 +138,7 @@ const ContactTeam: React.FC = () => {
                 </select>
               </div>
               <div>
-                <label className="block text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-[#7B2FF2] mb-1">
                   Subject
                 </label>
                 <input
@@ -148,11 +147,11 @@ const ContactTeam: React.FC = () => {
                   required
                   value={formData.subject}
                   onChange={handleChange}
-                  className="w-full p-3 rounded-md bg-white dark:bg-neutral-700 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-neutral-600 focus:ring-2 focus:ring-[#18cb96]"
+                  className="w-full p-3 rounded-md bg-white text-gray-900 border border-black focus:ring-2 focus:ring-[#7B2FF2] focus:border-[#7B2FF2]"
                 />
               </div>
               <div>
-                <label className="block text-gray-700 dark:text-gray-300 mb-1">
+                <label className="block text-[#7B2FF2] mb-1">
                   Message
                 </label>
                 <textarea
@@ -161,13 +160,13 @@ const ContactTeam: React.FC = () => {
                   required
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full p-3 rounded-md bg-white dark:bg-neutral-700 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-neutral-600 focus:ring-2 focus:ring-[#18cb96]"
+                  className="w-full p-3 rounded-md bg-white text-gray-900 border border-black focus:ring-2 focus:ring-[#7B2FF2] focus:border-[#7B2FF2]"
                 />
               </div>
               <div className="text-center">
                 <button
                   type="submit"
-                  className="bg-[#18cb96] text-white px-8 py-3 rounded-md font-medium hover:bg-opacity-90 transition shadow-lg"
+                  className="bg-gradient-to-r from-[#7B2FF2] to-[#22D1EE] text-white px-8 py-3 rounded-md font-medium hover:from-[#5F1EDC] hover:to-[#1CA7EC] transition shadow-lg"
                 >
                   Send Message
                 </button>

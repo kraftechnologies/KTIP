@@ -11,7 +11,7 @@ import {
   Instagram,
 } from 'lucide-react';
 
-const Footer: React.FC = () => {
+const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   // Define quick links as name + href
@@ -26,44 +26,44 @@ const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="bg-black text-white pt-16 pb-8">
+    <footer className="bg-white text-gray-900 pt-16 pb-8">
       <div className="container mx-auto px-4">
         {/* Main Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Column 1 */}
           <div>
             <div className="flex items-center mb-6">
-              <Layers className="w-7 h-7 text-[#18cb96]" />
+              <Layers className="w-7 h-7 text-[#7B2FF2]" />
               <span className="ml-2 text-xl font-semibold">KTIP</span>
             </div>
-            <p className="text-gray-400 mb-6">
+            <p className="text-gray-600 mb-6">
               Kraf Technologies Internship Program empowers students with real-world experience in cutting-edge technologies.
             </p>
             <div className="flex space-x-4">
               <a
                 href="https://facebook.com/kraftechnologies"
-                className="text-gray-400 hover:text-[#18cb96] transition-colors"
+                className="text-gray-400 hover:text-[#7B2FF2] transition-colors"
                 aria-label="Facebook"
               >
                 <Facebook className="w-5 h-5" />
               </a>
               <a
                 href="https://x.com/kraftechnologies"
-                className="text-gray-400 hover:text-[#18cb96] transition-colors"
+                className="text-gray-400 hover:text-[#7B2FF2] transition-colors"
                 aria-label="Twitter"
               >
                 <Twitter className="w-5 h-5" />
               </a>
               <a
                 href="https://www.linkedin.com/company/kraftechnologies/?viewAsMember=true"
-                className="text-gray-400 hover:text-[#18cb96] transition-colors"
+                className="text-gray-400 hover:text-[#7B2FF2] transition-colors"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-5 h-5" />
               </a>
               <a
                 href="https://instagram.com/kraftechnologies"
-                className="text-gray-400 hover:text-[#18cb96] transition-colors"
+                className="text-gray-400 hover:text-[#7B2FF2] transition-colors"
                 aria-label="Instagram"
               >
                 <Instagram className="w-5 h-5" />
@@ -73,7 +73,7 @@ const Footer: React.FC = () => {
 
           {/* Column 2: Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-6 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-12 after:bg-[#18cb96]">
+            <h3 className="text-lg font-semibold mb-6 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-12 after:bg-gradient-to-r after:from-[#7B2FF2] after:to-[#22D1EE]">
               Quick Links
             </h3>
             <ul className="space-y-3">
@@ -81,7 +81,7 @@ const Footer: React.FC = () => {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="text-gray-400 hover:text-[#18cb96] transition-colors"
+                    className="text-gray-600 hover:text-[#7B2FF2] transition-colors"
                   >
                     {link.name}
                   </a>
@@ -92,28 +92,28 @@ const Footer: React.FC = () => {
 
           {/* Column 3 */}
           <div>
-            <h3 className="text-lg font-semibold mb-6 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-12 after:bg-[#18cb96]">
+            <h3 className="text-lg font-semibold mb-6 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-12 after:bg-gradient-to-r after:from-[#7B2FF2] after:to-[#22D1EE]">
               Contact Us
             </h3>
             <ul className="space-y-4">
               <li className="flex">
-                <MapPin className="w-5 h-5 mr-3 text-[#18cb96] flex-shrink-0" />
-                <span className="text-gray-400">
+                <MapPin className="w-5 h-5 mr-3 text-[#7B2FF2] flex-shrink-0" />
+                <span className="text-gray-600">
                   Property No. 55, 3rd Floor Saidulajab, Near Westend, Marg
                   Lane-2, New Delhi, 110030
                 </span>
               </li>
               <li className="flex">
-                <Phone className="w-5 h-5 mr-3 text-[#18cb96] flex-shrink-0" />
-                <a href="tel:+919670269295" className="text-gray-400">
+                <Phone className="w-5 h-5 mr-3 text-[#7B2FF2] flex-shrink-0" />
+                <a href="tel:+919670269295" className="text-gray-600">
                   +91-9670269295
                 </a>
               </li>
               <li className="flex">
-                <Mail className="w-5 h-5 mr-3 text-[#18cb96] flex-shrink-0" />
+                <Mail className="w-5 h-5 mr-3 text-[#7B2FF2] flex-shrink-0" />
                 <a
                   href="mailto:info@kraftechnologies.com"
-                  className="text-gray-400"
+                  className="text-gray-600"
                 >
                   info@kraftechnologies.com
                 </a>
@@ -123,21 +123,21 @@ const Footer: React.FC = () => {
 
           {/* Column 4 */}
           <div>
-            <h3 className="text-lg font-semibold mb-6 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-12 after:bg-[#18cb96]">
+            <h3 className="text-lg font-semibold mb-6 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-12 after:bg-gradient-to-r after:from-[#7B2FF2] after:to-[#22D1EE]">
               Newsletter
             </h3>
-            <p className="text-gray-400 mb-4">
+            <p className="text-gray-600 mb-4">
               Subscribe to our newsletter for updates on internship opportunities.
             </p>
             <form className="flex flex-col space-y-3">
               <input
                 type="email"
                 placeholder="Your Email Address"
-                className="bg-gray-800 text-gray-400 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-[#18cb96]"
+                className="bg-white border border-black text-gray-900 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7B2FF2]"
               />
               <button
                 type="submit"
-                className="bg-[#18cb96] text-white px-5 py-3 rounded-md font-medium hover:bg-opacity-90 transition-all"
+                className="bg-gradient-to-r from-[#7B2FF2] to-[#22D1EE] text-white px-5 py-3 rounded-md font-medium hover:from-[#5F1EDC] hover:to-[#1CA7EC] transition-all"
               >
                 Subscribe
               </button>
@@ -146,7 +146,7 @@ const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Footer Row */}
-        <div className="border-t border-gray-800 mt-12 pt-8 px-4 flex flex-col md:flex-row justify-between items-center gap-4 text-gray-500">
+        <div className="border-t border-[#e0d7f8] mt-12 pt-8 px-4 flex flex-col md:flex-row justify-between items-center gap-4 text-gray-500">
           {/* Left side with logo and text */}
           <div className="flex items-center space-x-4">
             <img
@@ -154,7 +154,7 @@ const Footer: React.FC = () => {
               alt="Kraf Technologies Logo"
               className="w-12 h-12 object-contain rounded-full"
             />
-            <div className="text-sm leading-snug">
+            <div className="text-sm leading-snug text-gray-600">
               <p>All trademarks are the property of their respective owners</p>
               <p>All rights reserved {currentYear} Kraf Technologies.</p>
             </div>
@@ -162,7 +162,7 @@ const Footer: React.FC = () => {
 
           {/* Right side with Cashfree logo */}
           <div className="flex items-center">
-            <p className="text-sm mr-2">Payment Partner</p>
+            <p className="text-sm mr-2 text-gray-600">Payment Partner</p>
             <img
               src="https://storage.googleapis.com/datanyze-data//technologies/a146b015e8eb3e923b4d285d5c1dc972f7f513de.png"
               alt="Cashfree"

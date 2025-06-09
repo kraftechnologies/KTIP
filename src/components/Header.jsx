@@ -16,14 +16,17 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleNavigation = (path: string) => {
+  const handleNavigation = (path) => {
     navigate(path);
     setIsOpen(false); // Close mobile menu on navigation
   };
 
   const menuItems = [
     { label: "Home", path: "/" },
-    { label: "Learn More", path: "/learn-more" },
+    { label: "About", path: "/about" },
+    { label: "Domains", path: "/domain" },
+    { label: "Benefits", path: "/benefits" },
+    // { label: "Learn More", path: "/learn-more" },
     { label: "Attendance", path: "/attendance" },
     { label: "Contact With Team", path: "/contact" },
     { label: "Apply Now", path: "/contactform" },
@@ -31,13 +34,10 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-[#121212] shadow-md py-3 " : "bg-[#121212] py-4"
-      }`}
+      className={`fixed w-full z-50 transition-all duration-300 bg-white shadow-md py-3`}
     >
-      <div className="container mx-auto px-4 flex justify-between items-center">
+      <div className="container mx-auto px-4 flex items-center justify-between">
         {/* Logo */}
-        {/* logo should be changed to make it visible clearly */}
         <div className="flex items-center">
           <img
             src={logo}
@@ -46,22 +46,28 @@ const Header = () => {
           />
         </div>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
-          {menuItems.map((item) => (
+        {/* Centered Navigation */}
+        <nav className="hidden md:flex flex-1 justify-center items-center space-x-8">
+          {menuItems.filter(item => item.label !== "Apply Now").map((item) => (
             <button
               key={item.label}
               onClick={() => handleNavigation(item.path)}
-              className={`text-sm uppercase tracking-wide font-medium text-white transition-colors ${
-                scrolled
-                  ? "text-gray-700 hover:text-[#18cb96]"
-                  : "text-gray-700 hover:text-[#18cb96]"
-              }`}
+              className="text-sm uppercase tracking-wide font-medium text-gray-800 hover:text-[#7B2FF2] transition-colors"
             >
               {item.label}
             </button>
           ))}
         </nav>
+
+        {/* Apply Now Button (Desktop) */}
+        <div className="hidden md:flex items-center">
+          <button
+            onClick={() => handleNavigation('/contactform')}
+            className="bg-[#7B2FF2] hover:bg-[#5F1EDC] text-white font-semibold py-2 px-6 rounded-full shadow transition-all"
+          >
+            Apply Now
+          </button>
+        </div>
 
         {/* Mobile Toggle Button */}
         <button
@@ -79,17 +85,23 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-lg py-4 px-4">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-lg py-4 px-4 z-50">
           <nav className="flex flex-col space-y-4">
-            {menuItems.map((item) => (
+            {menuItems.filter(item => item.label !== "Apply Now").map((item) => (
               <button
                 key={item.label}
                 onClick={() => handleNavigation(item.path)}
-                className="text-sm uppercase text-gray-700 hover:text-[#18cb96] tracking-wide font-medium py-2"
+                className="text-sm uppercase text-gray-800 hover:text-[#7B2FF2] tracking-wide font-medium py-2"
               >
                 {item.label}
               </button>
             ))}
+            <button
+              onClick={() => handleNavigation('/contactform')}
+              className="bg-[#7B2FF2] hover:bg-[#5F1EDC] text-white font-semibold py-2 px-6 rounded-full shadow transition-all mt-2"
+            >
+              Apply Now
+            </button>
           </nav>
         </div>
       )}
