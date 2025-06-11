@@ -1,22 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
 import { Send, Check } from "lucide-react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import TeamMemberCard from '../sections/TeamMemberCard';
 
 const ContactForm = () => {
+  const location = useLocation();
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    college: "",
-    branch: "",
-    year: "",
+    name: '',
+    email: '',
+    phone: '',
+    domain: '',
+    message: '',
+    resume: null
   });
 
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [redirect, setRedirect] = useState(false);
+
+  useEffect(() => {
+    // If domain information is passed from Domain component
+    if (location.state?.selectedDomain) {
+      setFormData(prev => ({
+        ...prev,
+        domain: location.state.selectedDomain,
+        message: `I am interested in applying for the ${location.state.selectedDomain} position. ${location.state.domainDescription}`
+      }));
+    }
+  }, [location.state]);
 
   const validate = () => {
     const newErrors = {};
@@ -32,19 +44,18 @@ const ContactForm = () => {
     } else if (!/^\d{10}$/.test(formData.phone.replace(/\D/g, ""))) {
       newErrors.phone = "Phone number must be 10 digits";
     }
-    if (!formData.college.trim()) newErrors.college = "College is required";
-    if (!formData.branch.trim()) newErrors.branch = "Branch is required";
-    if (!formData.year.trim()) newErrors.year = "Year is required";
+    if (!formData.domain.trim()) newErrors.domain = "Domain is required";
+    if (!formData.message.trim()) newErrors.message = "Message is required";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
+    const { name, value, files } = e.target;
+    setFormData(prev => ({
       ...prev,
-      [name]: value,
+      [name]: files ? files[0] : value
     }));
     if (errors[name]) {
       setErrors((prev) => ({
@@ -118,16 +129,10 @@ const ContactForm = () => {
                       placeholder: "Enter your phone number",
                     },
                     {
-                      label: "College/University *",
-                      id: "college",
+                      label: "Selected Domain *",
+                      id: "domain",
                       type: "text",
-                      placeholder: "Enter your college/university",
-                    },
-                    {
-                      label: "Branch of Study *",
-                      id: "branch",
-                      type: "text",
-                      placeholder: "E.g., Computer Science, Electronics",
+                      placeholder: "Enter the selected domain",
                     },
                   ].map((field) => (
                     <div key={field.id}>
@@ -160,31 +165,26 @@ const ContactForm = () => {
 
                   <div>
                     <label
-                      htmlFor="year"
+                      htmlFor="message"
                       className="block text-white font-medium mb-2"
                     >
-                      Year of Study *
+                      Why are you interested in this domain? *
                     </label>
-                    <select
-                      id="year"
-                      name="year"
-                      value={formData["year"]}
+                    <textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
                       onChange={handleChange}
+                      required
+                      rows="4"
                       className={`${baseFieldStyles} ${
-                        errors.year
+                        errors.message
                           ? "border-red-500 focus:ring-2 focus:ring-red-200"
                           : "border border-gray-300 focus:ring-2 focus:ring-[#18cb96]/20 focus:border-[#18cb96]"
                       }`}
-                    >
-                      <option value="">Select your year</option>
-                      <option value="1">1st Year</option>
-                      <option value="2">2nd Year</option>
-                      <option value="3">3rd Year</option>
-                      <option value="4">4th Year</option>
-                      <option value="5+">Postgraduate</option>
-                    </select>
-                    {errors.year && (
-                      <p className="text-red-500 text-sm mt-1">{errors.year}</p>
+                    ></textarea>
+                    {errors.message && (
+                      <p className="text-red-500 text-sm mt-1">{errors.message}</p>
                     )}
                   </div>
                 </div>

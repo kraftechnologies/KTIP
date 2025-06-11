@@ -16,17 +16,17 @@ const Footer = () => {
 
   // Define quick links as name + href
   const quickLinks = [
-    { name: 'About', href: '/#about' },
+    { name: 'About', href: '/about' },
     { name: 'Program Highlights', href: '/#highlights' },
-    { name: 'Why Choose KTIP', href: '/#why-ktip' },
+    // { name: 'Why Choose KTIP', href: '/#why-ktip' },
     { name: 'Application Process', href: '/#process' },
     { name: 'Testimonials', href: '/#testimonials' },
     { name: 'FAQ', href: '/#faq' },
-    { name: 'Contact', href: '/contactform' },
+    { name: 'apply', href: '/contactform' },
   ];
 
   return (
-  <footer className="bg-white text-gray-900 pt-16 pb-8">
+    <footer className="bg-white text-gray-900 pt-16 pb-8">
       <div className="container mx-auto px-4">
         {/* Main Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -36,7 +36,7 @@ const Footer = () => {
               <Layers className="w-7 h-7 text-[#7B2FF2]" />
               <span className="ml-2 text-xl font-semibold">KTIP</span>
             </div>
-             <p className="text-gray-600 mb-6">
+            <p className="text-gray-600 mb-6">
               Kraf Technologies Internship Program empowers students with real-world experience in cutting-edge technologies.
             </p>
             <div className="flex space-x-4">
@@ -56,7 +56,7 @@ const Footer = () => {
               </a>
               <a
                 href="https://www.linkedin.com/company/kraftechnologies/?viewAsMember=true"
-               className="text-gray-400 hover:text-[#7B2FF2] transition-colors"
+                className="text-gray-400 hover:text-[#7B2FF2] transition-colors"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-5 h-5" />
@@ -81,7 +81,7 @@ const Footer = () => {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                  className="text-gray-600 hover:text-[#7B2FF2] transition-colors"
+                    className="text-gray-600 hover:text-[#7B2FF2] transition-colors"
                   >
                     {link.name}
                   </a>
@@ -90,23 +90,22 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Column 3 */}
+          {/* Column 3: Contact Information */}
           <div>
-             <h3 className="text-lg font-semibold mb-6 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-12 after:bg-gradient-to-r after:from-[#7B2FF2] after:to-[#22D1EE]">
+            <h3 className="text-lg font-semibold mb-6 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-12 after:bg-gradient-to-r after:from-[#7B2FF2] after:to-[#22D1EE]">
               Contact Us
             </h3>
             <ul className="space-y-4">
               <li className="flex">
                 <MapPin className="w-5 h-5 mr-3 text-[#7B2FF2] flex-shrink-0" />
                 <span className="text-gray-600">
-                  Property No. 55, 3rd Floor Saidulajab, Near Westend, Marg
-                  Lane-2, New Delhi, 110030
+                  400-A, 4th Floor, 12 Ajit Singh House, Yusuf Sarai Commercial Complex, New Delhi 110016, Near Green Park Metro Station Exit-2
                 </span>
               </li>
               <li className="flex">
                 <Phone className="w-5 h-5 mr-3 text-[#7B2FF2] flex-shrink-0" />
                 <a href="tel:+919670269295" className="text-gray-600">
-                  +91-9670269295
+                  +91 9670269295
                 </a>
               </li>
               <li className="flex">
@@ -118,15 +117,24 @@ const Footer = () => {
                   info@kraftechnologies.com
                 </a>
               </li>
+              <li className="flex">
+                <Mail className="w-5 h-5 mr-3 text-[#7B2FF2] flex-shrink-0" />
+                <a
+                  href="mailto:team@kraftechnologies.com"
+                  className="text-gray-600"
+                >
+                  team@kraftechnologies.com
+                </a>
+              </li>
             </ul>
           </div>
 
-          {/* Column 4 */}
+          {/* Column 4: Newsletter */}
           <div>
             <h3 className="text-lg font-semibold mb-6 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-12 after:bg-gradient-to-r after:from-[#7B2FF2] after:to-[#22D1EE]">
               Newsletter
             </h3>
-             <p className="text-gray-600 mb-4">
+            <p className="text-gray-600 mb-4">
               Subscribe to our newsletter for updates on internship opportunities.
             </p>
             <form className="flex flex-col space-y-3">
@@ -159,9 +167,6 @@ const Footer = () => {
               <p>All rights reserved {currentYear} Kraf Technologies.</p>
             </div>
           </div>
-
-          
-          
         </div>
       </div>
     </footer>
