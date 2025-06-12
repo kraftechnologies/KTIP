@@ -1,87 +1,123 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import AttendancePage from './AttendancePage';
+import Courses from './Courses';
+import Assignments from './Assignments';
+import Progress from './Progress';
 
 const Dashboard = () => {
-  const [isAdmin, setIsAdmin] = useState(false);
-  
-  useEffect(() => {
-    // Check if user is admin (you can implement your own logic here)
-    const checkAdminStatus = () => {
-      // For demo purposes, we'll use localStorage
-      const adminStatus = localStorage.getItem('isAdmin');
-      setIsAdmin(adminStatus === 'true');
-    };
+  const [activeTab, setActiveTab] = useState('overview');
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { isLoggedIn } = useAuth();
 
-    checkAdminStatus();
-  }, []);
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate('/login');
+    }
+  }, [isLoggedIn, navigate]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const tab = params.get('tab');
+    if (tab) {
+      setActiveTab(tab);
+    }
+  }, [location.search]);
+
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    navigate(`/dashboard?tab=${tab}`);
+  };
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'attendance':
+        return <AttendancePage />;
+      case 'courses':
+        return <Courses />;
+      case 'assignments':
+        return <Assignments />;
+      case 'progress':
+        return <Progress />;
+      default:
+        return (
+          <div className="p-6">
+            <h2 className="text-2xl font-bold mb-4">Welcome to your Dashboard</h2>
+            <p className="text-gray-600">
+              Select a tab to view your attendance, courses, assignments, or progress.
+            </p>
+          </div>
+        );
+    }
+  };
 
   return (
-    <section className="py-20 bg-white">
+    <div className="min-h-screen bg-gray-50 pt-20">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold mb-3 text-[#303030]">Student Dashboard</h2>
-          <div className="w-20 h-1 bg-[#7F56D9] mx-auto mb-6"></div>
-          <p className="text-lg text-[#667085] max-w-2xl mx-auto">
-            Access your courses, assignments, and track your progress.
-          </p>
-        </div>
-
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <Link to="/courses" className="bg-white p-6 rounded-lg shadow-sm border border-[#EAECF0] hover:shadow-md transition-all">
-            <div className="flex items-center justify-center w-12 h-12 bg-[#F9F5FF] rounded-full mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#7F56D9]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-              </svg>
-            </div>
-            <h3 className="text-xl font-semibold mb-2 text-[#303030]">My Courses</h3>
-            <p className="text-[#667085]">Access your enrolled courses and learning materials.</p>
-          </Link>
-
-          <Link to="/assignments" className="bg-white p-6 rounded-lg shadow-sm border border-[#EAECF0] hover:shadow-md transition-all">
-            <div className="flex items-center justify-center w-12 h-12 bg-[#F9F5FF] rounded-full mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#7F56D9]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-              </svg>
-            </div>
-            <h3 className="text-xl font-semibold mb-2 text-[#303030]">Assignments</h3>
-            <p className="text-[#667085]">View and submit your pending assignments.</p>
-          </Link>
-
-          <Link to="/attendance" className="bg-white p-6 rounded-lg shadow-sm border border-[#EAECF0] hover:shadow-md transition-all">
-            <div className="flex items-center justify-center w-12 h-12 bg-[#F9F5FF] rounded-full mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#7F56D9]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-              </svg>
-            </div>
-            <h3 className="text-xl font-semibold mb-2 text-[#303030]">My Attendance</h3>
-            <p className="text-[#667085]">Track your attendance across different courses.</p>
-          </Link>
-
-          <Link to="/progress" className="bg-white p-6 rounded-lg shadow-sm border border-[#EAECF0] hover:shadow-md transition-all">
-            <div className="flex items-center justify-center w-12 h-12 bg-[#F9F5FF] rounded-full mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#7F56D9]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-            </div>
-            <h3 className="text-xl font-semibold mb-2 text-[#303030]">Progress Report</h3>
-            <p className="text-[#667085]">View your academic progress and performance.</p>
-          </Link>
-
-          {isAdmin && (
-            <Link to="/admin/attendance" className="bg-white p-6 rounded-lg shadow-sm border border-[#EAECF0] hover:shadow-md transition-all">
-              <div className="flex items-center justify-center w-12 h-12 bg-[#FEF3F2] rounded-full mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#D92D20]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold mb-2 text-[#303030]">Admin: Attendance Management</h3>
-              <p className="text-[#667085]">Manage and monitor student attendance.</p>
-            </Link>
-          )}
+        <div className="bg-white rounded-lg shadow-md">
+          <div className="border-b border-gray-200">
+            <nav className="flex -mb-px">
+              <button
+                onClick={() => handleTabChange('overview')}
+                className={`py-4 px-6 text-sm font-medium ${
+                  activeTab === 'overview'
+                    ? 'border-b-2 border-[#7B2FF2] text-[#7B2FF2]'
+                    : 'text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+              >
+                Overview
+              </button>
+              <button
+                onClick={() => handleTabChange('attendance')}
+                className={`py-4 px-6 text-sm font-medium ${
+                  activeTab === 'attendance'
+                    ? 'border-b-2 border-[#7B2FF2] text-[#7B2FF2]'
+                    : 'text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+              >
+                Attendance
+              </button>
+              <button
+                onClick={() => handleTabChange('courses')}
+                className={`py-4 px-6 text-sm font-medium ${
+                  activeTab === 'courses'
+                    ? 'border-b-2 border-[#7B2FF2] text-[#7B2FF2]'
+                    : 'text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+              >
+                My Courses
+              </button>
+              <button
+                onClick={() => handleTabChange('assignments')}
+                className={`py-4 px-6 text-sm font-medium ${
+                  activeTab === 'assignments'
+                    ? 'border-b-2 border-[#7B2FF2] text-[#7B2FF2]'
+                    : 'text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+              >
+                Assignments
+              </button>
+              <button
+                onClick={() => handleTabChange('progress')}
+                className={`py-4 px-6 text-sm font-medium ${
+                  activeTab === 'progress'
+                    ? 'border-b-2 border-[#7B2FF2] text-[#7B2FF2]'
+                    : 'text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+              >
+                Progress
+              </button>
+            </nav>
+          </div>
+          <div className="p-6">
+            {renderContent()}
+          </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
-export default Dashboard;
+export default Dashboard; 

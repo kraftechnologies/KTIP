@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import AttendanceTable from "./AttendanceTable";
 import AttendanceChart from "./AttendanceChart";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 // Sample data for students
 const sampleStudentsData = [
@@ -101,22 +102,8 @@ const AdminAttendancePage = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [viewMode, setViewMode] = useState("student"); // "student", "course", "subject"
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
   const navigate = useNavigate();
-  
-  useEffect(() => {
-    // Check if user is logged in and is admin (you can implement your own logic here)
-    const checkLoginStatus = () => {
-      // For demo purposes, we'll use localStorage
-      const loginStatus = localStorage.getItem('isLoggedIn');
-      const adminStatus = localStorage.getItem('isAdmin');
-      setIsLoggedIn(loginStatus === 'true');
-      setIsAdmin(adminStatus === 'true');
-    };
-
-    checkLoginStatus();
-  }, []);
+  const { isLoggedIn, isAdmin } = useAuth();
   
   // Filter subjects based on selected course
   const filteredSubjects = selectedCourse 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import AttendanceTable from "./AttendanceTable";
 import AttendanceChart from "./AttendanceChart";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 // Sample data for a student's enrolled courses
 const sampleStudentData = {
@@ -44,19 +45,8 @@ function getProgressColor(attendance) {
 }
 
 const AttendancePage = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    // Check if user is logged in (you can implement your own logic here)
-    const checkLoginStatus = () => {
-      // For demo purposes, we'll use localStorage
-      const loginStatus = localStorage.getItem('isLoggedIn');
-      setIsLoggedIn(loginStatus === 'true');
-    };
-
-    checkLoginStatus();
-  }, []);
+  const { isLoggedIn } = useAuth();
 
   // Get overall attendance across all courses
   const overallAttendance = sampleStudentData.enrolledCourses.reduce(
