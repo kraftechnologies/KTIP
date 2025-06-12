@@ -1,9 +1,22 @@
 import React, { useState } from 'react';
 import { Code, Palette, BarChart3, Cloud, Shield, Glasses, Briefcase, Megaphone, Users, FileText } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const DomainCard = ({ icon, title, description, skills, tasks, color }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [showTasks, setShowTasks] = useState(false);
+  const navigate = useNavigate();
+  
+  const handleApply = () => {
+    // Navigate to apply page with domain information
+    navigate('/contactform', { 
+      state: { 
+        selectedDomain: title,
+        domainSkills: skills,
+        domainDescription: description
+      }
+    });
+  };
   
   return (
     <div 
@@ -60,6 +73,7 @@ const DomainCard = ({ icon, title, description, skills, tasks, color }) => {
         </div>
         
         <button 
+          onClick={handleApply}
           className={`w-full py-2 rounded-lg transition-colors ${
             isHovered 
               ? color + ' text-white' 

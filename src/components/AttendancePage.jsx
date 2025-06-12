@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import AttendanceTable from "./AttendanceTable";
 import AttendanceChart from "./AttendanceChart";
+import { useNavigate } from "react-router-dom";
 
 // Sample data for a student's enrolled courses
 const sampleStudentData = {
@@ -30,11 +31,59 @@ const sampleStudentData = {
   ]
 };
 
+function getProgressColor(attendance) {
+  if (attendance >= 90) {
+    return "bg-[#12B76A]"; // Green
+  } else if (attendance >= 75) {
+    return "bg-[#7F56D9]"; // Purple
+  } else if (attendance >= 60) {
+    return "bg-[#F79009]"; // Yellow/Orange
+  } else {
+    return "bg-[#F04438]"; // Red
+  }
+}
+
 const AttendancePage = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check if user is logged in (you can implement your own logic here)
+    const checkLoginStatus = () => {
+      // For demo purposes, we'll use localStorage
+      const loginStatus = localStorage.getItem('isLoggedIn');
+      setIsLoggedIn(loginStatus === 'true');
+    };
+
+    checkLoginStatus();
+  }, []);
+
   // Get overall attendance across all courses
   const overallAttendance = sampleStudentData.enrolledCourses.reduce(
     (sum, course) => sum + course.attendance, 0
   ) / sampleStudentData.enrolledCourses.length;
+
+  if (!isLoggedIn) {
+    return (
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold mb-3 text-[#303030]">Access Denied</h2>
+            <div className="w-20 h-1 bg-[#7F56D9] mx-auto mb-6"></div>
+            <p className="text-lg text-[#667085] max-w-2xl mx-auto">
+              Please login to view your attendance details.
+            </p>
+            <button
+              onClick={() => navigate('/')}
+              className="mt-8 bg-[#7B2FF2] hover:bg-[#5F1EDC] text-white font-semibold py-2 px-6 rounded-full shadow transition-all"
+            >
+              Go to Login
+            </button>
+          </div>
+        </div>
+      </section>
+    );
+  }
   
   return (
     <section className="py-20 bg-white">

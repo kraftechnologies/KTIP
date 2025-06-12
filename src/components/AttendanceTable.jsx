@@ -1,5 +1,17 @@
 import React from "react";
 
+function getProgressColor(attendance) {
+  if (attendance >= 90) {
+    return "bg-[#12B76A]"; // Green
+  } else if (attendance >= 75) {
+    return "bg-[#7F56D9]"; // Purple
+  } else if (attendance >= 60) {
+    return "bg-[#F79009]"; // Yellow/Orange
+  } else {
+    return "bg-[#F04438]"; // Red
+  }
+}
+
 const AttendanceTable = ({ attendanceData }) => {
   return (
     <div className="overflow-x-auto">

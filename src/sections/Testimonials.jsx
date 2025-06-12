@@ -44,9 +44,10 @@ const Testimonials = () => {
 
   useEffect(() => {
     if (slidesRef.current) {
-      slidesRef.current.style.transform = `translateX(-${currentSlide * 100}%)`;
+      const slideWidth = 100 / testimonials.length;
+      slidesRef.current.style.transform = `translateX(-${currentSlide * slideWidth}%)`;
     }
-  }, [currentSlide]);
+  }, [currentSlide, testimonials.length]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -84,7 +85,7 @@ const Testimonials = () => {
                 <div
                   key={index}
                   className="w-full px-4"
-                  style={{ flexBasis: `${100 / testimonials.length}%` }}
+                  style={{ width: `${100 / testimonials.length}%` }}
                 >
                   <div className="bg-gradient-to-br from-[#7B2FF2] to-[#22D1EE] border border-[#e0d7f8] rounded-lg shadow-md p-1">
                     <div className="bg-white rounded-lg p-8 md:p-10 flex flex-col md:flex-row items-center">
@@ -97,7 +98,7 @@ const Testimonials = () => {
                           />
                         </div>
                       </div>
-                      <div>
+                      <div className="flex-1">
                         <Quote className="w-10 h-10 text-[#7B2FF2] opacity-50 mb-4" />
                         <p className="text-gray-900 italic mb-6">
                           "{testimonial.quote}"

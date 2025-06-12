@@ -80,7 +80,7 @@ const FAQ = () => {
                   openIndex === index ? "max-h-96" : "max-h-0"
                 }`}
               >
-                <p className="p-5 pt-0 text-gray-700 bg-white">{faq.answer}</p>
+                <p className="p-5 pt-3 text-gray-700 bg-white">{faq.answer}</p>
               </div>
             </div>
           ))}
