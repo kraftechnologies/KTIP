@@ -55,7 +55,10 @@ const Header = () => {
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center">
+        <div 
+          className="flex items-center cursor-pointer hover:opacity-80 transition-opacity"
+          onClick={() => handleNavigation('/')}
+        >
           <img
             src={logo}
             alt="KTIP Logo"
