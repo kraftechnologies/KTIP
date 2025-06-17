@@ -23,6 +23,11 @@ const Header = () => {
     navigate(path);
     setIsOpen(false); // Close mobile menu on navigation
   };
+  
+  const handleDashboardTab = (tab) => {
+    navigate(`/dashboard?tab=${tab}`);
+    setIsOpen(false);
+  };
 
   const handleLogout = () => {
     logout();
@@ -46,7 +51,7 @@ const Header = () => {
         </div>
 
         {/* Navigation Links */}
-        <nav className="hidden md:flex items-center space-x-8">
+        <nav className="hidden md:flex items-center justify-center flex-1 space-x-8">
           {!isLoggedIn ? (
             // Public navigation
             <>
@@ -80,73 +85,78 @@ const Header = () => {
               >
                 Contact
               </button>
-            </>
-          ) : (
-            // User is logged in - show dashboard link
-            <button
-              onClick={() => handleNavigation('/dashboard')}
-              className="text-sm uppercase tracking-wide font-medium text-gray-800 hover:text-[#7B2FF2] transition-colors"
-            >
-              Dashboard
-            </button>
-          )}
-        </nav>
-
-        {/* User Menu / Login Button */}
-        <div className="hidden md:flex items-center">
-          {isLoggedIn ? (
-            <div className="relative group">
-              <button className="flex items-center space-x-2 text-[#7B2FF2] font-medium">
-                <span>{userName || (isAdmin ? "Admin" : "Student")}</span>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                <button
-                  onClick={() => handleNavigation('/dashboard')}
-                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                >
-                  Dashboard
-                </button>
-                <button
-                  onClick={() => handleNavigation('/attendance')}
-                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                >
-                  My Attendance
-                </button>
-                {isAdmin && (
-                  <button
-                    onClick={() => handleNavigation('/admin/attendance')}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    Admin: Attendance
-                  </button>
-                )}
-                <button
-                  onClick={handleLogout}
-                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                >
-                  Logout
-                </button>
-              </div>
-            </div>
-          ) : (
-            <>
               <button
                 onClick={() => handleNavigation('/login')}
-                className="text-[#7B2FF2] hover:text-[#5F1EDC] font-semibold py-2 px-6 rounded-full border border-[#7B2FF2] transition-all mr-4"
+                className="text-sm uppercase tracking-wide font-medium text-gray-800 hover:text-[#7B2FF2] transition-colors"
               >
                 Login
               </button>
               <button
                 onClick={() => handleNavigation('/contactform')}
-                className="bg-[#7B2FF2] hover:bg-[#5F1EDC] text-white font-semibold py-2 px-6 rounded-full shadow transition-all"
+                className="text-sm uppercase tracking-wide font-medium text-gray-800 hover:text-[#7B2FF2] transition-colors"
               >
                 Apply Now
               </button>
             </>
+          ) : (
+            // User is logged in - show appropriate dashboard based on role
+            <>
+              {!isAdmin ? (
+                // Student navigation
+                <>
+                  <button
+                    onClick={() => handleDashboardTab('overview')}
+                    className="text-sm uppercase tracking-wide font-medium text-gray-800 hover:text-[#7B2FF2] transition-colors"
+                  >
+                    Overview
+                  </button>
+                  <button
+                    onClick={() => handleDashboardTab('attendance')}
+                    className="text-sm uppercase tracking-wide font-medium text-gray-800 hover:text-[#7B2FF2] transition-colors"
+                  >
+                    Attendance
+                  </button>
+                  <button
+                    onClick={() => handleDashboardTab('courses')}
+                    className="text-sm uppercase tracking-wide font-medium text-gray-800 hover:text-[#7B2FF2] transition-colors"
+                  >
+                    My Courses
+                  </button>
+                  <button
+                    onClick={() => handleDashboardTab('assignments')}
+                    className="text-sm uppercase tracking-wide font-medium text-gray-800 hover:text-[#7B2FF2] transition-colors"
+                  >
+                    Assignments
+                  </button>
+                  <button
+                    onClick={() => handleDashboardTab('progress')}
+                    className="text-sm uppercase tracking-wide font-medium text-gray-800 hover:text-[#7B2FF2] transition-colors"
+                  >
+                    Progress
+                  </button>
+                </>
+              ) : (
+                // Admin navigation
+                <button
+                  onClick={() => handleNavigation('/admin/dashboard')}
+                  className="text-sm uppercase tracking-wide font-medium text-gray-800 hover:text-[#7B2FF2] transition-colors"
+                >
+                  Admin Dashboard
+                </button>
+              )}
+              <button
+                onClick={handleLogout}
+                className="text-sm uppercase tracking-wide font-medium text-gray-800 hover:text-[#7B2FF2] transition-colors"
+              >
+                Logout
+              </button>
+            </>
           )}
+        </nav>
+
+        {/* User Menu / Login Button - Hidden now as buttons moved to nav */}
+        <div className="hidden">
+          {/* All buttons moved to main navigation */}
         </div>
 
         {/* Mobile Toggle Button */}
@@ -200,58 +210,73 @@ const Header = () => {
                 >
                   Contact
                 </button>
+                <button
+                  onClick={() => handleNavigation('/login')}
+                  className="text-sm uppercase text-gray-800 hover:text-[#7B2FF2] tracking-wide font-medium py-2"
+                >
+                  Login
+                </button>
+                <button
+                  onClick={() => handleNavigation('/contactform')}
+                  className="text-sm uppercase text-gray-800 hover:text-[#7B2FF2] tracking-wide font-medium py-2"
+                >
+                  Apply Now
+                </button>
               </>
             ) : (
-              // User is logged in - show dashboard and other links
+              // User is logged in - show appropriate dashboard based on role
               <>
-                <button
-                  onClick={() => handleNavigation('/dashboard')}
-                  className="text-sm uppercase text-gray-800 hover:text-[#7B2FF2] tracking-wide font-medium py-2"
-                >
-                  Dashboard
-                </button>
-                <button
-                  onClick={() => handleNavigation('/attendance')}
-                  className="text-sm uppercase text-gray-800 hover:text-[#7B2FF2] tracking-wide font-medium py-2"
-                >
-                  My Attendance
-                </button>
-                {isAdmin && (
+                {!isAdmin ? (
+                  // Student navigation
+                  <>
+                    <button
+                      onClick={() => handleDashboardTab('overview')}
+                      className="text-sm uppercase text-gray-800 hover:text-[#7B2FF2] tracking-wide font-medium py-2"
+                    >
+                      Overview
+                    </button>
+                    <button
+                      onClick={() => handleDashboardTab('attendance')}
+                      className="text-sm uppercase text-gray-800 hover:text-[#7B2FF2] tracking-wide font-medium py-2"
+                    >
+                      Attendance
+                    </button>
+                    <button
+                      onClick={() => handleDashboardTab('courses')}
+                      className="text-sm uppercase text-gray-800 hover:text-[#7B2FF2] tracking-wide font-medium py-2"
+                    >
+                      My Courses
+                    </button>
+                    <button
+                      onClick={() => handleDashboardTab('assignments')}
+                      className="text-sm uppercase text-gray-800 hover:text-[#7B2FF2] tracking-wide font-medium py-2"
+                    >
+                      Assignments
+                    </button>
+                    <button
+                      onClick={() => handleDashboardTab('progress')}
+                      className="text-sm uppercase text-gray-800 hover:text-[#7B2FF2] tracking-wide font-medium py-2"
+                    >
+                      Progress
+                    </button>
+                  </>
+                ) : (
+                  // Admin navigation
                   <button
-                    onClick={() => handleNavigation('/admin/attendance')}
+                    onClick={() => handleNavigation('/admin/dashboard')}
                     className="text-sm uppercase text-gray-800 hover:text-[#7B2FF2] tracking-wide font-medium py-2"
                   >
-                    Admin: Attendance
+                    Admin Dashboard
                   </button>
                 )}
-              </>
-            )}
-            
-            <div className="pt-2 border-t border-gray-200">
-              {isLoggedIn ? (
                 <button
                   onClick={handleLogout}
-                  className="text-[#7B2FF2] hover:text-[#5F1EDC] font-semibold py-2 px-6 rounded-full border border-[#7B2FF2] transition-all w-full"
+                  className="text-sm uppercase text-gray-800 hover:text-[#7B2FF2] tracking-wide font-medium py-2"
                 >
                   Logout
                 </button>
-              ) : (
-                <>
-                  <button
-                    onClick={() => handleNavigation('/login')}
-                    className="text-[#7B2FF2] hover:text-[#5F1EDC] font-semibold py-2 px-6 rounded-full border border-[#7B2FF2] transition-all w-full mb-2"
-                  >
-                    Login
-                  </button>
-                  <button
-                    onClick={() => handleNavigation('/contactform')}
-                    className="bg-[#7B2FF2] hover:bg-[#5F1EDC] text-white font-semibold py-2 px-6 rounded-full shadow transition-all w-full"
-                  >
-                    Apply Now
-                  </button>
-                </>
-              )}
-            </div>
+              </>
+            )}
           </nav>
         </div>
       )}
