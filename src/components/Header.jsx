@@ -91,7 +91,7 @@ const Header = () => {
           ) : (
             <>
               <button
-                onClick={() => handleNavigation('/login')}
+                onClick={() => handleNavigation('/LoginPage')}
                 className="text-[#7B2FF2] hover:text-[#5F1EDC] font-semibold py-2 px-6 rounded-full border border-[#7B2FF2] transition-all"
               >
                 Login

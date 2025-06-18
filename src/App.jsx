@@ -16,6 +16,7 @@ import ContactForm from "./sections/ContactForm";
 // import LearnMore from "./components/LearnMore";
 import AttendancePage from "./components/AttendancePage";
 import { AuthProvider } from "./context/AuthContext";
+import LoginPage from "./components/LoginPage";
 
 const App = () => {
   useEffect(() => {
@@ -36,6 +37,7 @@ const App = () => {
             <Route path="/contactform" element={<ContactForm />} />
             <Route path="/contact" element={<ContactTeam />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/loginPage" element ={<LoginPage />} />
             <Route path="/dashboard" element={<Dashboard />} />
             {/* <Route path="/learn-more" element={<LearnMore />} /> */}
             <Route path="/attendance" element={<AttendancePage />} />
