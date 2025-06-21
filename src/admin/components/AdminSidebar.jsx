@@ -6,6 +6,7 @@ const AdminSidebar = () => {
     { path: "/admin/dashboard", label: "Dashboard", icon: "📊" },
     { path: "/admin/students", label: "Students", icon: "👥" },
     { path: "/admin/attendance", label: "Attendance", icon: "📋" },
+    { path: "/admin/my-attendance", label: "My Attendance", icon: "📅" },
     { path: "/admin/courses", label: "Courses", icon: "📚" },
     { path: "/admin/assignments", label: "Assignments", icon: "📝" },
     { path: "/admin/settings", label: "Settings", icon: "⚙️" },

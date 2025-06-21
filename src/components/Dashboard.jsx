@@ -54,14 +54,66 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-20">
-      <div className="container mx-auto px-4">
+    <div className="min-h-screen bg-gray-50">
         <div className="bg-white rounded-lg shadow-md">
-          {/* Navigation tabs removed - now using main header navigation */}
+          <div className="border-b border-gray-200">
+            <nav className="flex -mb-px">
+              <button
+                onClick={() => handleTabChange('overview')}
+                className={`py-4 px-6 text-sm font-medium ${
+                  activeTab === 'overview'
+                    ? 'border-b-2 border-[#7B2FF2] text-[#7B2FF2]'
+                    : 'text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+              >
+                Overview
+              </button>
+              <button
+                onClick={() => handleTabChange('attendance')}
+                className={`py-4 px-6 text-sm font-medium ${
+                  activeTab === 'attendance'
+                    ? 'border-b-2 border-[#7B2FF2] text-[#7B2FF2]'
+                    : 'text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+              >
+                Attendance
+              </button>
+              <button
+                onClick={() => handleTabChange('courses')}
+                className={`py-4 px-6 text-sm font-medium ${
+                  activeTab === 'courses'
+                    ? 'border-b-2 border-[#7B2FF2] text-[#7B2FF2]'
+                    : 'text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+              >
+                My Courses
+              </button>
+              <button
+                onClick={() => handleTabChange('assignments')}
+                className={`py-4 px-6 text-sm font-medium ${
+                  activeTab === 'assignments'
+                    ? 'border-b-2 border-[#7B2FF2] text-[#7B2FF2]'
+                    : 'text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+              >
+                Assignments
+              </button>
+              <button
+                onClick={() => handleTabChange('progress')}
+                className={`py-4 px-6 text-sm font-medium ${
+                  activeTab === 'progress'
+                    ? 'border-b-2 border-[#7B2FF2] text-[#7B2FF2]'
+                    : 'text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+              >
+                Progress
+              </button>
+            </nav>
+          </div>
           <div className="p-6">
             {renderContent()}
           </div>
-        </div>
+        
       </div>
     </div>
   );

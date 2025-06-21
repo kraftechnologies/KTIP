@@ -26,12 +26,47 @@ export const AuthProvider = ({ children }) => {
     checkLoginStatus();
   }, []);
 
-  const login = (email, password) => {
+  const login = async (employeeId, password) => {
+    try {
+      // Try API first, fallback to mock for demo
+      let response;
+      try {
+        response = await fetch("http://localhost:5000/api/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ employeeId, password }),
+        });
+      } catch (apiError) {
+        // API not available, use mock authentication
+        console.log("API not available, using mock authentication");
+        return mockLogin(employeeId, password);
+      }
+
+      const data = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("isLoggedIn", "true");
+        localStorage.setItem("isAdmin", data.isAdmin ? "true" : "false");
+        localStorage.setItem("userName", data.userName || data.name || "User");
+        
+        setIsLoggedIn(true);
+        setIsAdmin(data.isAdmin || false);
+        setUserName(data.userName || data.name || "User");
+        
+        return { success: true, isAdmin: data.isAdmin || false };
+      } else {
+        throw new Error(data.message || "Invalid credentials");
+      }
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const mockLogin = (employeeId, password) => {
     return new Promise((resolve, reject) => {
-      // Mock login logic
       setTimeout(() => {
-        if (email === "admin@example.com" && password === "admin123") {
-          // Admin login
+        if (employeeId === "admin" && password === "admin123") {
           localStorage.setItem("isLoggedIn", "true");
           localStorage.setItem("isAdmin", "true");
           localStorage.setItem("userName", "Admin User");
@@ -39,8 +74,7 @@ export const AuthProvider = ({ children }) => {
           setIsAdmin(true);
           setUserName("Admin User");
           resolve({ success: true, isAdmin: true });
-        } else if (email === "student@example.com" && password === "student123") {
-          // Student login
+        } else if (employeeId === "student" && password === "student123") {
           localStorage.setItem("isLoggedIn", "true");
           localStorage.setItem("isAdmin", "false");
           localStorage.setItem("userName", "John Doe");
@@ -49,13 +83,14 @@ export const AuthProvider = ({ children }) => {
           setUserName("John Doe");
           resolve({ success: true, isAdmin: false });
         } else {
-          reject({ success: false, message: "Invalid email or password" });
+          reject({ success: false, message: "Invalid employee ID or password" });
         }
       }, 1000);
     });
   };
 
   const logout = () => {
+    localStorage.removeItem("token");
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("isAdmin");
     localStorage.removeItem("userName");

@@ -18,6 +18,7 @@ import AdminLayout from "./admin/layouts/AdminLayout";
 import AdminDashboard from "./admin/pages/AdminDashboard";
 import AdminAttendance from "./admin/pages/AdminAttendance";
 import AdminStudents from "./admin/pages/AdminStudents";
+import AdminMyAttendance from "./admin/components/AdminMyAttendance";
 
 // Sections
 import About from "./sections/About";
@@ -47,6 +48,7 @@ function App() {
         <Route path="dashboard" element={<AdminDashboard />} />
         <Route path="students" element={<AdminStudents />} />
         <Route path="attendance" element={<AdminAttendance />} />
+        <Route path="my-attendance" element={<AdminMyAttendance />} />
         <Route path="courses" element={<ConstructionPage title="Courses Management" />} />
         <Route path="assignments" element={<ConstructionPage title="Assignments Management" />} />
         <Route path="settings" element={<ConstructionPage title="Admin Settings" />} />

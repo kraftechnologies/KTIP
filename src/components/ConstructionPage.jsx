@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const ConstructionPage = () => {
   return (
     <section className="py-20 bg-white">
-      <div className="container mx-auto px-4 text-center">
+      <div className="w-full px-0 text-center">
         <div className="mb-10">
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -1,10 +1,13 @@
 import React, { useEffect, useRef } from "react";
 
-const AttendanceChart = ({ attendanceData }) => {
+const AttendanceChart = ({ attendanceData, courseData }) => {
   const canvasRef = useRef(null);
 
+  // Handle different prop structures
+  const data = attendanceData || (courseData?.subjects) || [];
+
   useEffect(() => {
-    if (!canvasRef.current || attendanceData.length === 0) return;
+    if (!canvasRef.current || !data || data.length === 0) return;
 
     const ctx = canvasRef.current.getContext("2d");
     if (!ctx) return;
@@ -15,8 +18,8 @@ const AttendanceChart = ({ attendanceData }) => {
     // Chart dimensions
     const chartWidth = canvasRef.current.width - 60;
     const chartHeight = canvasRef.current.height - 60;
-    const barWidth = Math.min(40, chartWidth / attendanceData.length - 10);
-    const spacing = (chartWidth - barWidth * attendanceData.length) / (attendanceData.length + 1);
+    const barWidth = Math.min(40, chartWidth / data.length - 10);
+    const spacing = (chartWidth - barWidth * data.length) / (data.length + 1);
 
     // Draw axes
     ctx.beginPath();
@@ -45,7 +48,7 @@ const AttendanceChart = ({ attendanceData }) => {
     }
 
     // Draw bars
-    attendanceData.forEach((subject, index) => {
+    data.forEach((subject, index) => {
       const x = 40 + spacing + (barWidth + spacing) * index;
       const barHeight = (subject.attendance / 100) * chartHeight;
       const y = chartHeight + 30 - barHeight;
@@ -92,11 +95,11 @@ const AttendanceChart = ({ attendanceData }) => {
     ctx.textAlign = "center";
     ctx.fillText("Subject Attendance Percentage", canvasRef.current.width / 2, 15);
 
-  }, [attendanceData]);
+  }, [data]);
 
   return (
     <div className="w-full h-full flex justify-center">
-      {attendanceData.length > 0 ? (
+      {data && data.length > 0 ? (
         <canvas 
           ref={canvasRef} 
           width={500} 
