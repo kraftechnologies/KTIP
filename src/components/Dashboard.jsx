@@ -10,13 +10,25 @@ const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const navigate = useNavigate();
   const location = useLocation();
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, loading } = useAuth();
 
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (!loading && !isLoggedIn) {
       navigate('/login');
     }
-  }, [isLoggedIn, navigate]);
+  }, [isLoggedIn, loading, navigate]);
+
+  // Show loading while authentication state is being checked
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#7B2FF2] mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);

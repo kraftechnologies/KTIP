@@ -27,7 +27,19 @@ import Benefits from "./sections/Benefits";
 import ContactForm from "./sections/ContactForm";
 
 function App() {
-  const { isLoggedIn, isAdmin } = useAuth();
+  const { isLoggedIn, isAdmin, loading } = useAuth();
+
+  // Show loading spinner while checking authentication state
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#7B2FF2] mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   // Layout wrapper for public and user routes
   const MainLayout = ({ children }) => (
