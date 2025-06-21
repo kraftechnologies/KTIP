@@ -7,18 +7,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./components/Home";
 import Login from "./components/Login";
-import ConstructionPage from "./components/ConstructionPage";
 
-// User components
-import Dashboard from "./components/Dashboard";
-import AttendancePage from "./components/AttendancePage";
-
-// Admin layout and pages
-import AdminLayout from "./admin/layouts/AdminLayout";
-import AdminDashboard from "./admin/pages/AdminDashboard";
-import AdminAttendance from "./admin/pages/AdminAttendance";
-import AdminStudents from "./admin/pages/AdminStudents";
-import AdminMyAttendance from "./admin/components/AdminMyAttendance";
 
 // Sections
 import About from "./sections/About";
@@ -27,19 +16,6 @@ import Benefits from "./sections/Benefits";
 import ContactForm from "./sections/ContactForm";
 
 function App() {
-  const { isLoggedIn, isAdmin, loading } = useAuth();
-
-  // Show loading spinner while checking authentication state
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#7B2FF2] mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading...</p>
-        </div>
-      </div>
-    );
-  }
 
   // Layout wrapper for public and user routes
   const MainLayout = ({ children }) => (
@@ -54,18 +30,6 @@ function App() {
 
   return (
     <Routes>
-      {/* Admin Routes */}
-      <Route path="/admin" element={<AdminLayout />}>
-        <Route index element={<Navigate to="/admin/dashboard" replace />} />
-        <Route path="dashboard" element={<AdminDashboard />} />
-        <Route path="students" element={<AdminStudents />} />
-        <Route path="attendance" element={<AdminAttendance />} />
-        <Route path="my-attendance" element={<AdminMyAttendance />} />
-        <Route path="courses" element={<ConstructionPage title="Courses Management" />} />
-        <Route path="assignments" element={<ConstructionPage title="Assignments Management" />} />
-        <Route path="settings" element={<ConstructionPage title="Admin Settings" />} />
-        <Route path="profile" element={<ConstructionPage title="Admin Profile" />} />
-      </Route>
 
       {/* Public and User Routes */}
       <Route path="/" element={<MainLayout><Home /></MainLayout>} />
@@ -76,23 +40,6 @@ function App() {
       <Route path="/contactform" element={<MainLayout><ContactForm /></MainLayout>} />
       <Route path="/login" element={<MainLayout><Login /></MainLayout>} />
       
-      {/* Protected routes */}
-      <Route
-        path="/dashboard"
-        element={
-          isLoggedIn ? 
-          <MainLayout><Dashboard /></MainLayout> : 
-          <Navigate to="/login" replace />
-        }
-      />
-      <Route
-        path="/attendance"
-        element={
-          isLoggedIn ? 
-          <MainLayout><AttendancePage /></MainLayout> : 
-          <Navigate to="/login" replace />
-        }
-      />
     </Routes>
   );
 }
