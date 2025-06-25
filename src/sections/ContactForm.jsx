@@ -2,6 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ApplyNow from './ApplyNow';
 
+// Add your available domains here
+const DOMAIN_OPTIONS = [
+  'Web Development',
+  'Mobile Development',
+  'Data Science',
+  'Cloud Computing',
+  'UI/UX Design',
+  'Cybersecurity',
+  'Marketing',
+  'Business Analysis',
+  'Other'
+];
+
 const ContactForm = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -20,17 +33,27 @@ const ContactForm = () => {
       setFormData(prev => ({
         ...prev,
         domain: location.state.selectedDomain,
-        message: `I am interested in applying for the ${location.state.selectedDomain} position. ${location.state.domainDescription}`
+        message: `I am interested in applying for the ${location.state.selectedDomain} position. ${location.state.domainDescription || ''}`
       }));
     }
   }, [location.state]);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: files ? files[0] : value
-    }));
+    setFormData(prev => {
+      // If domain is changed, update message as well
+      if (name === 'domain') {
+        return {
+          ...prev,
+          domain: value,
+          message: `I am interested in applying for the ${value} position.`
+        };
+      }
+      return {
+        ...prev,
+        [name]: files ? files[0] : value
+      };
+    });
   };
 
   const handleSubmit = (e) => {
@@ -106,18 +129,34 @@ const ContactForm = () => {
 
               <div>
                 <label htmlFor="domain" className="block text-sm font-medium text-gray-700 mb-2">
-                  Selected Domain
+                  {formData.domain ? 'Selected Domain' : 'Select Domain'}
                 </label>
-                <input
-                  type="text"
-                  id="domain"
-                  name="domain"
-                  value={formData.domain}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-gray-50"
-                  readOnly
-                />
+                {formData.domain ? (
+                  <input
+                    type="text"
+                    id="domain"
+                    name="domain"
+                    value={formData.domain}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-gray-50"
+                    readOnly
+                  />
+                ) : (
+                  <select
+                    id="domain"
+                    name="domain"
+                    value={formData.domain}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                  >
+                    <option value="">Select Domain</option>
+                    {DOMAIN_OPTIONS.map((domain) => (
+                      <option key={domain} value={domain}>{domain}</option>
+                    ))}
+                  </select>
+                )}
               </div>
             </div>
 
