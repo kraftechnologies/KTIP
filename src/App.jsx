@@ -14,7 +14,7 @@ import { useEffect } from "react";
 import ConstructionPage from "./components/ConstructionPage";
 import ContactForm from "./sections/ContactForm";
 // import LearnMore from "./components/LearnMore";
-import AttendancePage from "./components/AttendancePage";
+// import AttendancePage from "./components/AttendancePage";
 import { AuthProvider } from "./context/AuthContext";
 
 const App = () => {
@@ -38,7 +38,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={<Dashboard />} />
             {/* <Route path="/learn-more" element={<LearnMore />} /> */}
-            <Route path="/attendance" element={<AttendancePage />} />
+            {/* <Route path="/attendance" element={<AttendancePage />} /> */}
             <Route path="*" element={<ConstructionPage />} />
           </Routes>
         </main>

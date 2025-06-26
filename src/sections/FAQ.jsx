@@ -3,39 +3,130 @@ import { Plus, Minus } from "lucide-react";
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState(null);
+  const [showAll, setShowAll] = useState(false);
 
   const faqs = [
     {
-      question: "Who is eligible to apply for KTIP?",
-      answer:
-        "KTIP is open to students pursuing undergraduate or postgraduate degrees in Computer Science, IT, Electronics, or related fields. Students in their pre-final or final year are preferred.",
+      question: "Who can apply for the Kraf Technologies Internship Program(KTiP)?",
+      answer: (
+        <span>
+          Anyone who is:
+          <ul className="list-disc ml-6 mt-1">
+            <li>A current UG/PG student</li>
+            <li>A recent graduate</li>
+            <li>Looking to switch careers or upskill</li>
+            <li>Passionate about gaining real-world tech/business experience</li>
+          </ul>
+        </span>
+      ),
     },
     {
-      question: "Is there any stipend provided during the internship?",
-      answer:
-        "Yes, all interns receive a competitive monthly stipend based on their performance and the domain they are working in.",
+      question: "What domains can I apply for?",
+      answer: (
+        <span>
+          You can choose from multiple exciting domains including:
+          <ul className="list-disc ml-6 mt-1">
+            <li>Data Analytics & Business Intelligence</li>
+            <li>Web & App Development</li>
+            <li>Digital Marketing</li>
+            <li>Product Management</li>
+            <li>UI/UX Design</li>
+            <li>Business & Strategy</li>
+            <li>and more!</li>
+          </ul>
+        </span>
+      ),
     },
     {
-      question: "What is the duration of the internship program?",
+      question: "Is this a paid internship?",
       answer:
-        "The standard duration is 8 weeks during the summer (May to July). However, exceptional performers may be offered an extended internship.",
+        "The program currently offers valuable mentorship, exposure, and certification. Specific compensation details (if applicable) will be mentioned in the domain-wise project description or shared during onboarding.",
     },
     {
-      question: "Is the internship fully remote or on-site?",
+      question: "How long is the internship program?",
       answer:
-        "KTIP follows a hybrid model. Some activities require physical presence at our office, while others can be completed remotely.",
+        "Most internships typically span 4 to 8 weeks, depending on the project and domain. Detailed timelines will be provided after selection.",
     },
     {
-      question: "What skills do I need to have before applying?",
+      question: "Will I work on real projects or only theoretical tasks?",
       answer:
-        "Basic programming knowledge is essential. Depending on your area of interest, familiarity with relevant technologies (e.g., Python for AI/ML, JavaScript for web development) is beneficial.",
+        "You will work on live industry projects that mirror actual business challenges — gaining practical experience with tools and workflows used by professionals.",
     },
     {
-      question: "How are interns selected for the program?",
+      question: "Do I get a certificate after completion?",
+      answer: (
+        <span>
+          Yes! All successful interns will receive a Certificate of Completion. Top performers may also receive a Letter of Recommendation.
+        </span>
+      ),
+    },
+    {
+      question: "What kind of mentorship can I expect?",
       answer:
-        "The selection process includes application review, technical assessment, and personal interviews to evaluate both technical skills and cultural fit.",
+        "Each intern will be guided by experienced industry mentors who provide project feedback, career advice, and personalized support throughout the journey.",
+    },
+    {
+      question: "Are there any live sessions or interactions?",
+      answer: (
+        <span>
+          Absolutely! You'll have access to:
+          <ul className="list-disc ml-6 mt-1">
+            <li>Guest lectures by industry experts</li>
+            <li>Live doubt-clearing and mentorship sessions</li>
+            <li>Company virtual tours for behind-the-scenes exposure</li>
+          </ul>
+        </span>
+      ),
+    },
+    {
+      question: "Can I switch domains during the internship?",
+      answer:
+        "Based on availability and your progress, cross-functional exposure may be allowed. We support curiosity and encourage exploration.",
+    },
+    {
+      question: "Is this internship remote or in-person?",
+      answer:
+        "The program is designed to be remote-friendly, making it accessible to students across India (and even globally). Any in-person components will be optional and communicated in advance.",
+    },
+    {
+      question: "How do I apply?",
+      answer: (
+        <span>
+          You can apply through our official portal or shared registration form. Make sure to:
+          <ol className="list-decimal ml-6 mt-1">
+            <li>Submit accurate details</li>
+            <li>Select your domain(s) of interest</li>
+            <li>Upload your resume/CV or LinkedIn profile</li>
+          </ol>
+        </span>
+      ),
+    },
+    {
+      question: "What is the selection process?",
+      answer: (
+        <span>
+          Our selection typically includes:
+          <ul className="list-disc ml-6 mt-1">
+            <li>Application screening</li>
+            <li>Optional aptitude/skill-based task</li>
+            <li>Final onboarding communication</li>
+          </ul>
+        </span>
+      ),
+    },
+    {
+      question: "Do I need prior experience to apply?",
+      answer:
+        "Not at all! We welcome beginners as well as those with prior exposure. A willingness to learn and contribute is all you need.",
+    },
+    {
+      question: "Can I mention this internship on my resume/LinkedIn?",
+      answer:
+        "Yes! We encourage you to showcase your experience, projects, and skills on professional platforms like LinkedIn.",
     },
   ];
+
+  const visibleFaqs = showAll ? faqs : faqs.slice(0, 6);
 
   const toggleAccordion = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -54,16 +145,14 @@ const FAQ = () => {
           </p>
         </div>
         <div className="max-w-3xl mx-auto">
-          {faqs.map((faq, index) => (
+          {visibleFaqs.map((faq, index) => (
             <div
               key={index}
               className="mb-4 border border-[#7B2FF2] rounded-lg overflow-hidden transition-all duration-300 bg-white"
             >
               <button
                 className={`flex justify-between items-center w-full p-5 text-left font-medium focus:outline-none bg-white ${
-                  openIndex === index
-                    ? "border-b-2 border-[#22D1EE]"
-                    : ""
+                  openIndex === index ? "border-b-2 border-[#22D1EE]" : ""
                 }`}
                 onClick={() => toggleAccordion(index)}
                 aria-expanded={openIndex === index}
@@ -84,6 +173,19 @@ const FAQ = () => {
               </div>
             </div>
           ))}
+          {faqs.length > 6 && (
+            <div className="text-center mt-6">
+              <button
+                className="text-[#7B2FF2] font-semibold underline focus:outline-none"
+                onClick={() => {
+                  setShowAll((prev) => !prev);
+                  setOpenIndex(null); // close any open accordion when toggling
+                }}
+              >
+                {showAll ? "See less" : "See more"}
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </section>

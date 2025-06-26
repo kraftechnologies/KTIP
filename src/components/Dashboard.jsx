@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import AttendancePage from './AttendancePage';
+// import AttendancePage from './AttendancePage';
 import Courses from './Courses';
 import Assignments from './Assignments';
 import Progress from './Progress';
@@ -33,8 +33,8 @@ const Dashboard = () => {
 
   const renderContent = () => {
     switch (activeTab) {
-      case 'attendance':
-        return <AttendancePage />;
+      // case 'attendance':
+      //   return <AttendancePage />;
       case 'courses':
         return <Courses />;
       case 'assignments':
