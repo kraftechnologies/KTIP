@@ -1,0 +1,37 @@
+{
+    "degrees": {
+      "bachelor": [
+        { "name": "Bachelor of Technology", "abbreviation": "B.Tech", "field": "Engineering" },
+        { "name": "Bachelor of Engineering", "abbreviation": "B.E", "field": "Engineering" },
+        { "name": "Bachelor of Science", "abbreviation": "B.Sc", "field": "Science" },
+        { "name": "Bachelor of Commerce", "abbreviation": "B.Com", "field": "Commerce" },
+        { "name": "Bachelor of Business Administration", "abbreviation": "BBA", "field": "Business" },
+        { "name": "Bachelor of Computer Applications", "abbreviation": "BCA", "field": "Computer Science" },
+        { "name": "Bachelor of Arts", "abbreviation": "BA", "field": "Arts & Humanities" },
+        { "name": "Bachelor of Architecture", "abbreviation": "B.Arch", "field": "Architecture" },
+        { "name": "Bachelor of Design", "abbreviation": "B.Des", "field": "Design" },
+        { "name": "Bachelor of Pharmacy", "abbreviation": "B.Pharm", "field": "Pharmacy" },
+        { "name": "Bachelor of Fine Arts", "abbreviation": "BFA", "field": "Fine Arts" },
+        { "name": "Bachelor of Education", "abbreviation": "B.Ed", "field": "Education" },
+        { "name": "Bachelor of Laws", "abbreviation": "LLB", "field": "Law" },
+        { "name": "Bachelor of Social Work", "abbreviation": "BSW", "field": "Social Work" }
+      ],
+      "master": [
+        { "name": "Master of Technology", "abbreviation": "M.Tech", "field": "Engineering" },
+        { "name": "Master of Engineering", "abbreviation": "M.E", "field": "Engineering" },
+        { "name": "Master of Science", "abbreviation": "M.Sc", "field": "Science" },
+        { "name": "Master of Commerce", "abbreviation": "M.Com", "field": "Commerce" },
+        { "name": "Master of Business Administration", "abbreviation": "MBA", "field": "Business" },
+        { "name": "Master of Computer Applications", "abbreviation": "MCA", "field": "Computer Science" },
+        { "name": "Master of Arts", "abbreviation": "MA", "field": "Arts & Humanities" },
+        { "name": "Master of Architecture", "abbreviation": "M.Arch", "field": "Architecture" },
+        { "name": "Master of Design", "abbreviation": "M.Des", "field": "Design" },
+        { "name": "Master of Pharmacy", "abbreviation": "M.Pharm", "field": "Pharmacy" },
+        { "name": "Master of Fine Arts", "abbreviation": "MFA", "field": "Fine Arts" },
+        { "name": "Master of Education", "abbreviation": "M.Ed", "field": "Education" },
+        { "name": "Master of Laws", "abbreviation": "LLM", "field": "Law" },
+        { "name": "Master of Social Work", "abbreviation": "MSW", "field": "Social Work" }
+      ]
+    }
+  }
+  

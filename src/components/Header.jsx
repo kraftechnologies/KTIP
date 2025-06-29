@@ -85,18 +85,6 @@ const Header = () => {
               >
                 Contact
               </button>
-              <button
-                onClick={() => handleNavigation('/login')}
-                className="text-sm uppercase tracking-wide font-medium text-gray-800 hover:text-[#7B2FF2] transition-colors"
-              >
-                Login
-              </button>
-              <button
-                onClick={() => handleNavigation('/contactform')}
-                className="text-sm uppercase tracking-wide font-medium text-gray-800 hover:text-[#7B2FF2] transition-colors"
-              >
-                Apply Now
-              </button>
             </>
           ) : (
             // User is logged in - show appropriate dashboard based on role
@@ -154,10 +142,23 @@ const Header = () => {
           )}
         </nav>
 
-        {/* User Menu / Login Button - Hidden now as buttons moved to nav */}
-        <div className="hidden">
-          {/* All buttons moved to main navigation */}
-        </div>
+        {/* Login & Apply Now Buttons - Always visible at top-right on desktop */}
+        {!isLoggedIn && (
+          <div className="hidden md:flex items-center space-x-4 ml-4">
+            <button
+              onClick={() => handleNavigation('/login')}
+              className="px-4 py-2 rounded-lg border-2 border-[#7B2FF2] text-[#7B2FF2] font-semibold shadow-none bg-transparent hover:bg-[#f3e8ff] transition-colors"
+            >
+              Login
+            </button>
+            <button
+              onClick={() => handleNavigation('/contactform')}
+              className="px-4 py-2 rounded-md text-white font-semibold shadow bg-gradient-to-r from-[#7B2FF2] to-[#22D1EE] hover:from-[#22D1EE] hover:to-[#7B2FF2] transition-colors"
+            >
+              Apply Now
+            </button>
+          </div>
+        )}
 
         {/* Mobile Toggle Button */}
         <button
@@ -209,18 +210,6 @@ const Header = () => {
                   className="text-sm uppercase text-gray-800 hover:text-[#7B2FF2] tracking-wide font-medium py-2"
                 >
                   Contact
-                </button>
-                <button
-                  onClick={() => handleNavigation('/login')}
-                  className="text-sm uppercase text-gray-800 hover:text-[#7B2FF2] tracking-wide font-medium py-2"
-                >
-                  Login
-                </button>
-                <button
-                  onClick={() => handleNavigation('/contactform')}
-                  className="text-sm uppercase text-gray-800 hover:text-[#7B2FF2] tracking-wide font-medium py-2"
-                >
-                  Apply Now
                 </button>
               </>
             ) : (

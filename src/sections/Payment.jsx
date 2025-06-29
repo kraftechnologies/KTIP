@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { CreditCard, Landmark, Wallet, CheckCircle } from 'lucide-react';
 
+const steps = [
+  { label: "Application", done: true },
+  { label: "Payment", done: false },
+  { label: "Confirmation", done: false },
+];
+
 const Payment = ({ formData, onBack }) => {
   const [selectedMethod, setSelectedMethod] = useState('card');
   const [isProcessing, setIsProcessing] = useState(false);
@@ -84,7 +90,7 @@ const Payment = ({ formData, onBack }) => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-white py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-2xl mx-auto pt-12">
+      <div className="max-w-2xl mx-auto pt-12"> {/* Added pt-12 for top padding */}
         <div className="bg-white rounded-2xl shadow-2xl border border-purple-100 overflow-hidden">
           <div className="p-8">
             <ProgressBar />
@@ -334,3 +340,7 @@ const Payment = ({ formData, onBack }) => {
 };
 
 export default Payment;
+
+// Add this to your CSS for fade-in animation if not already present:
+// .animate-fade-in { animation: fadeIn 0.5s; }
+// @keyframes fadeIn { from { opacity: 0; transform: translateY(20px);} to { opacity: 1; transform: none; } }
