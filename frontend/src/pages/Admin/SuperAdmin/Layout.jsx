@@ -9,7 +9,13 @@ import {
   Settings, 
   CreditCard, 
   Home, 
-  LogOut 
+  LogOut,
+  FileText,
+  FolderOpen,
+  Briefcase,
+  MessageSquare,
+  Shield,
+  DollarSign
 } from 'lucide-react';
 
 const SuperAdminLayout = ({ children }) => {
@@ -19,11 +25,16 @@ const SuperAdminLayout = ({ children }) => {
   const navLinks = [
     { name: 'Dashboard', path: '/admin/super', icon: <Home size={18} /> },
     { name: 'Manage Users', path: '/admin/super/users', icon: <Users size={18} /> },
-    { name: 'Manage Courses', path: '/admin/super/courses', icon: <BookOpen size={18} /> },
+    { name: 'Assignments', path: '/admin/super/assignments', icon: <FileText size={18} /> },
+    { name: 'Modules', path: '/admin/super/modules', icon: <FolderOpen size={18} /> },
+    { name: 'Projects', path: '/admin/super/projects', icon: <Briefcase size={18} /> },
+    { name: 'Courses', path: '/admin/super/courses', icon: <BookOpen size={18} /> },
     { name: 'Support Tickets', path: '/admin/super/tickets', icon: <TicketCheck size={18} /> },
+    { name: 'Announcements', path: '/admin/super/announcements', icon: <MessageSquare size={18} /> },
     { name: 'Analytics', path: '/admin/super/analytics', icon: <BarChart2 size={18} /> },
-    { name: 'Payment Reports', path: '/admin/super/payments', icon: <CreditCard size={18} /> },
-    { name: 'Admin Settings', path: '/admin/super/settings', icon: <Settings size={18} /> },
+    { name: 'Financial Tools', path: '/admin/super/financial', icon: <DollarSign size={18} /> },
+    { name: 'Admin Management', path: '/admin/super/admin-management', icon: <Shield size={18} /> },
+    { name: 'Settings', path: '/admin/super/settings', icon: <Settings size={18} /> },
   ];
   
   const handleLogout = () => {

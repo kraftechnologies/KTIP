@@ -5,5 +5,8 @@ const API_BASE_URL = process.env.NODE_ENV === 'production'
 
 export const apiCall = async (endpoint, options = {}) => {
   const response = await fetch(`${API_BASE_URL}${endpoint}`, options);
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
   return response.json();
 };

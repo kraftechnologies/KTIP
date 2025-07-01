@@ -1,17 +1,46 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../../context/AuthContext.jsx';
 import SuperAdminLayout from './Layout.jsx';
-import { Users, BookOpen, CheckCircle, AlertCircle, Activity } from 'lucide-react';
+import { superAdminService } from '../../../services/superAdminService.js';
+import { Users, BookOpen, CheckCircle, AlertCircle, Activity, UserCheck, Shield, Settings } from 'lucide-react';
 
 const SuperAdminDashboard = () => {
   const { userName } = useAuth();
+  const [dashboardData, setDashboardData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // Sample data for dashboard stats
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      try {
+        const data = await superAdminService.getDashboard();
+        setDashboardData(data);
+      } catch (error) {
+        console.error('Error fetching dashboard data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDashboardData();
+  }, []);
+
+  if (loading) {
+    return (
+      <SuperAdminLayout>
+        <div className="flex justify-center items-center h-64">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#7B2FF2]"></div>
+        </div>
+      </SuperAdminLayout>
+    );
+  }
+
   const stats = [
-    { title: 'Users', value: 150, change: '+12%', icon: <Users size={24} className="text-blue-600" /> },
-    { title: 'Courses', value: 12, change: '+2', icon: <BookOpen size={24} className="text-green-600" /> },
-    { title: 'Assignments', value: 45, change: '-5', icon: <CheckCircle size={24} className="text-orange-600" /> },
-    { title: 'Support Tickets', value: 8, change: '+3', icon: <AlertCircle size={24} className="text-red-600" /> },
+    { title: 'Total Users', value: dashboardData?.totalUsers || 0, icon: <Users size={24} className="text-blue-600" /> },
+    { title: 'Students', value: dashboardData?.totalStudents || 0, icon: <UserCheck size={24} className="text-green-600" /> },
+    { title: 'Mentors', value: dashboardData?.totalMentors || 0, icon: <Shield size={24} className="text-purple-600" /> },
+    { title: 'Courses', value: dashboardData?.totalCourses || 0, icon: <BookOpen size={24} className="text-orange-600" /> },
+    { title: 'Active Tickets', value: dashboardData?.activeTickets || 0, icon: <AlertCircle size={24} className="text-red-600" /> },
+    { title: 'Admins', value: dashboardData?.totalAdmins || 0, icon: <Settings size={24} className="text-gray-600" /> },
   ];
 
   return (
@@ -27,7 +56,7 @@ const SuperAdminDashboard = () => {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           {stats.map((stat, index) => (
             <div key={index} className="bg-white p-6 rounded-lg shadow hover:shadow-md transition-shadow">
               <div className="flex justify-between items-start">
@@ -36,11 +65,6 @@ const SuperAdminDashboard = () => {
                   <p className="text-3xl font-bold">{stat.value}</p>
                 </div>
                 <div className="p-3 rounded-full bg-gray-50">{stat.icon}</div>
-              </div>
-              <div className="mt-4 flex items-center">
-                <span className={`text-sm ${stat.change.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>
-                  {stat.change} from last week
-                </span>
               </div>
             </div>
           ))}

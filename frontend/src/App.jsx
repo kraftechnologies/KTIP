@@ -21,6 +21,14 @@ import SuperAdminDashboard from "./pages/Admin/SuperAdmin/Dashboard.jsx";
 import ManageUsers from "./pages/Admin/SuperAdmin/ManageUsers.jsx";
 import ManageCourses from "./pages/Admin/SuperAdmin/ManageCourses.jsx";
 import SupportTickets from "./pages/Admin/SuperAdmin/SupportTickets.jsx";
+import Analytics from "./pages/Admin/SuperAdmin/Analytics.jsx";
+import PaymentReports from "./pages/Admin/SuperAdmin/PaymentReports.jsx";
+import AdminSettings from "./pages/Admin/SuperAdmin/AdminSettings.jsx";
+import Assignments from "./pages/Admin/SuperAdmin/Assignments.jsx";
+import Modules from "./pages/Admin/SuperAdmin/Modules.jsx";
+import Projects from "./pages/Admin/SuperAdmin/Projects.jsx";
+import Announcements from "./pages/Admin/SuperAdmin/Announcements.jsx";
+import AdminManagement from "./pages/Admin/SuperAdmin/AdminManagement.jsx";
 import DomainAdminDashboard from "./pages/Admin/DomainAdmin/Dashboard.jsx";
 import EvaluationAdminDashboard from "./pages/Admin/EvaluationAdmin/Dashboard.jsx";
 import SupportAdminDashboard from "./pages/Admin/SupportAdmin/Dashboard.jsx";
@@ -51,7 +59,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/dashboard" element={<Dashboard />} />
             
-            {/* Admin Routes */}
+            {/* Super Admin Routes */}
             <Route path="/admin/super" element={
               <ProtectedRoute requiredRole="super_admin">
                 <SuperAdminDashboard />
@@ -62,6 +70,21 @@ const App = () => {
                 <ManageUsers />
               </ProtectedRoute>
             } />
+            <Route path="/admin/super/assignments" element={
+              <ProtectedRoute requiredRole="super_admin">
+                <Assignments />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/super/modules" element={
+              <ProtectedRoute requiredRole="super_admin">
+                <Modules />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/super/projects" element={
+              <ProtectedRoute requiredRole="super_admin">
+                <Projects />
+              </ProtectedRoute>
+            } />
             <Route path="/admin/super/courses" element={
               <ProtectedRoute requiredRole="super_admin">
                 <ManageCourses />
@@ -70,6 +93,31 @@ const App = () => {
             <Route path="/admin/super/tickets" element={
               <ProtectedRoute requiredRole="super_admin">
                 <SupportTickets />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/super/announcements" element={
+              <ProtectedRoute requiredRole="super_admin">
+                <Announcements />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/super/analytics" element={
+              <ProtectedRoute requiredRole="super_admin">
+                <Analytics />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/super/financial" element={
+              <ProtectedRoute requiredRole="super_admin">
+                <PaymentReports />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/super/admin-management" element={
+              <ProtectedRoute requiredRole="super_admin">
+                <AdminManagement />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/super/settings" element={
+              <ProtectedRoute requiredRole="super_admin">
+                <AdminSettings />
               </ProtectedRoute>
             } />
             <Route path="/admin/domain" element={

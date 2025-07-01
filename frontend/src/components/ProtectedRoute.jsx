@@ -20,16 +20,12 @@ const ProtectedRoute = ({ children, requiredRole = null }) => {
   }
   
   // If role is required and user doesn't have it, redirect to appropriate page
-  if (requiredRole) {
-    // For admin routes
-    if (requiredRole.includes('admin') && userRole !== requiredRole) {
-      return <Navigate to="/login" replace />;
+  if (requiredRole && userRole !== requiredRole) {
+    // Super admin has access to everything
+    if (userRole === 'super_admin') {
+      return children;
     }
-    
-    // For student routes
-    if (requiredRole === 'student' && userRole !== 'student') {
-      return <Navigate to="/login" replace />;
-    }
+    return <Navigate to="/login" replace />;
   }
   
   // If all checks pass, render the protected component

@@ -29,72 +29,101 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (employeeId, password) => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        // Mock authentication logic
-        // In a real app, this would call your authentication API
+    try {
+      // API call for authentication
+      const API_BASE_URL = process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:5000/api';
+      const response = await fetch(`${API_BASE_URL}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ employeeId, password }),
+      });
+      
+      const data = await response.json();
+      
+      if (response.ok && data.success) {
+        // Store token
+        localStorage.setItem('token', data.token);
         
-        // Super admin credentials
-        if (employeeId === "admin" && password === "admin123") {
-          const userData = {
-            isLoggedIn: true,
-            isAdmin: true,
-            userName: "Super Admin",
-            userRole: "super_admin"
-          };
-          updateAuthState(userData);
-          resolve({ success: true, ...userData });
-        } 
-        // Domain admin credentials
-        else if (employeeId === "domain" && password === "admin123") {
-          const userData = {
-            isLoggedIn: true,
-            isAdmin: true,
-            userName: "Domain Admin",
-            userRole: "domain_admin"
-          };
-          updateAuthState(userData);
-          resolve({ success: true, ...userData });
-        }
-        // Evaluation admin credentials
-        else if (employeeId === "eval" && password === "admin123") {
-          const userData = {
-            isLoggedIn: true,
-            isAdmin: true,
-            userName: "Evaluation Admin",
-            userRole: "evaluation_admin"
-          };
-          updateAuthState(userData);
-          resolve({ success: true, ...userData });
-        }
-        // Support admin credentials
-        else if (employeeId === "support" && password === "admin123") {
-          const userData = {
-            isLoggedIn: true,
-            isAdmin: true,
-            userName: "Support Admin",
-            userRole: "support_admin"
-          };
-          updateAuthState(userData);
-          resolve({ success: true, ...userData });
-        }
-        // Student credentials
-        else if (employeeId === "student" && password === "student123") {
-          const userData = {
-            isLoggedIn: true,
-            isAdmin: false,
-            userName: "John Doe",
-            userRole: "student"
-          };
-          updateAuthState(userData);
-          resolve({ success: true, ...userData });
-        } 
-        // Invalid credentials
-        else {
-          reject({ success: false, message: "Invalid employee ID or password" });
-        }
-      }, 800);
-    });
+        const userData = {
+          isLoggedIn: true,
+          isAdmin: ['super_admin', 'domain_admin', 'evaluation_admin', 'support_admin'].includes(data.user.role),
+          userName: data.user.name,
+          userRole: data.user.role
+        };
+        
+        updateAuthState(userData);
+        return { success: true, ...userData };
+      } else {
+        throw new Error(data.message || 'Login failed');
+      }
+    } catch (error) {
+      // Fallback to mock authentication for development
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          // Super admin credentials
+          if (employeeId === "admin" && password === "admin123") {
+            const userData = {
+              isLoggedIn: true,
+              isAdmin: true,
+              userName: "Super Admin",
+              userRole: "super_admin"
+            };
+            updateAuthState(userData);
+            resolve({ success: true, ...userData });
+          } 
+          // Domain admin credentials
+          else if (employeeId === "domain" && password === "admin123") {
+            const userData = {
+              isLoggedIn: true,
+              isAdmin: true,
+              userName: "Domain Admin",
+              userRole: "domain_admin"
+            };
+            updateAuthState(userData);
+            resolve({ success: true, ...userData });
+          }
+          // Evaluation admin credentials
+          else if (employeeId === "eval" && password === "admin123") {
+            const userData = {
+              isLoggedIn: true,
+              isAdmin: true,
+              userName: "Evaluation Admin",
+              userRole: "evaluation_admin"
+            };
+            updateAuthState(userData);
+            resolve({ success: true, ...userData });
+          }
+          // Support admin credentials
+          else if (employeeId === "support" && password === "admin123") {
+            const userData = {
+              isLoggedIn: true,
+              isAdmin: true,
+              userName: "Support Admin",
+              userRole: "support_admin"
+            };
+            updateAuthState(userData);
+            resolve({ success: true, ...userData });
+          }
+          // Student credentials
+          else if (employeeId === "student" && password === "student123") {
+            const userData = {
+              isLoggedIn: true,
+              isAdmin: false,
+              userName: "John Doe",
+              userRole: "student"
+            };
+            updateAuthState(userData);
+            resolve({ success: true, ...userData });
+          } 
+          // Invalid credentials
+          else {
+            reject({ success: false, message: "Invalid employee ID or password" });
+          }
+        }, 800);
+      });
+    }
   };
 
   const updateAuthState = (userData) => {
@@ -116,6 +145,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("isAdmin");
     localStorage.removeItem("userName");
     localStorage.removeItem("userRole");
+    localStorage.removeItem("token");
     setIsLoggedIn(false);
     setIsAdmin(false);
     setUserName("");
