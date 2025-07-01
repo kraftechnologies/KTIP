@@ -69,15 +69,6 @@ const SuperAdminLayout = ({ children }) => {
               </li>
             ))}
             <li className="border-t mt-6 pt-4">
-              <Link
-                to="/"
-                className="flex items-center px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100"
-              >
-                <span className="mr-3"><Home size={18} /></span>
-                Return to Site
-              </Link>
-            </li>
-            <li>
               <button
                 onClick={handleLogout}
                 className="flex items-center w-full text-left px-4 py-2 rounded-md text-gray-700 hover:bg-gray-100"

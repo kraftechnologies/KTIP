@@ -10,20 +10,14 @@ const Evaluation = require('../../models/Evaluation');
 // Dashboard Analytics
 const getDashboard = async (req, res) => {
   try {
-    const totalUsers = await User.countDocuments();
-    const totalStudents = await User.countDocuments({ role: 'student' });
-    const totalMentors = await User.countDocuments({ role: 'mentor' });
-    const totalAdmins = await User.countDocuments({ role: { $in: ['domain_admin', 'evaluation_admin', 'support_admin'] } });
-    const activeTickets = await Ticket.countDocuments({ status: 'open' });
-    const totalCourses = await Course.countDocuments();
-    
+    // Mock data for development without database
     res.json({
-      totalUsers,
-      totalStudents,
-      totalMentors,
-      totalAdmins,
-      activeTickets,
-      totalCourses
+      totalUsers: 150,
+      totalStudents: 120,
+      totalMentors: 15,
+      totalAdmins: 8,
+      activeTickets: 5,
+      totalCourses: 12
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -33,26 +27,15 @@ const getDashboard = async (req, res) => {
 // User Management
 const getAllUsers = async (req, res) => {
   try {
-    const { page = 1, limit = 10, role, search } = req.query;
-    const query = {};
+    // Mock users data
+    const mockUsers = [
+      { _id: '1', name: 'John Doe', email: 'john@example.com', role: 'student', isBlocked: false },
+      { _id: '2', name: 'Jane Smith', email: 'jane@example.com', role: 'student', isBlocked: false },
+      { _id: '3', name: 'Mike Johnson', email: 'mike@example.com', role: 'mentor', isBlocked: false },
+      { _id: '4', name: 'Sarah Wilson', email: 'sarah@example.com', role: 'domain_admin', isBlocked: false }
+    ];
     
-    if (role) query.role = role;
-    if (search) {
-      query.$or = [
-        { name: { $regex: search, $options: 'i' } },
-        { email: { $regex: search, $options: 'i' } }
-      ];
-    }
-    
-    const users = await User.find(query)
-      .select('-password')
-      .limit(limit * 1)
-      .skip((page - 1) * limit)
-      .sort({ createdAt: -1 });
-      
-    const total = await User.countDocuments(query);
-    
-    res.json({ users, total, page, pages: Math.ceil(total / limit) });
+    res.json({ users: mockUsers, total: mockUsers.length, page: 1, pages: 1 });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -102,8 +85,11 @@ const createAssignment = async (req, res) => {
 
 const getAllAssignments = async (req, res) => {
   try {
-    const assignments = await Assignment.find().populate('domain', 'name');
-    res.json(assignments);
+    const mockAssignments = [
+      { _id: '1', title: 'React Basics', description: 'Learn React fundamentals', difficulty: 'medium', dueDate: '2024-02-15' },
+      { _id: '2', title: 'Node.js API', description: 'Build REST API', difficulty: 'hard', dueDate: '2024-02-20' }
+    ];
+    res.json(mockAssignments);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -122,8 +108,11 @@ const uploadModule = async (req, res) => {
 
 const getAllModules = async (req, res) => {
   try {
-    const modules = await Module.find().populate('domain', 'name');
-    res.json(modules);
+    const mockModules = [
+      { _id: '1', title: 'JavaScript Fundamentals', type: 'video', description: 'Learn JS basics', createdAt: '2024-01-15' },
+      { _id: '2', title: 'React Components', type: 'pdf', description: 'Component guide', createdAt: '2024-01-20' }
+    ];
+    res.json(mockModules);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -142,8 +131,11 @@ const createProject = async (req, res) => {
 
 const getAllProjects = async (req, res) => {
   try {
-    const projects = await Project.find().populate('assignedTeams', 'name');
-    res.json(projects);
+    const mockProjects = [
+      { _id: '1', title: 'E-commerce App', description: 'Build shopping app', status: 'active', teamSize: 3, deadline: '2024-03-01', createdAt: '2024-01-10' },
+      { _id: '2', title: 'Blog Platform', description: 'Create blog system', status: 'completed', teamSize: 2, deadline: '2024-02-15', createdAt: '2024-01-05' }
+    ];
+    res.json(mockProjects);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -162,8 +154,11 @@ const createCourse = async (req, res) => {
 
 const getAllCourses = async (req, res) => {
   try {
-    const courses = await Course.find();
-    res.json(courses);
+    const mockCourses = [
+      { _id: '1', title: 'Full Stack Development', description: 'Complete web development course', price: 299, category: 'Web Development' },
+      { _id: '2', title: 'React Masterclass', description: 'Advanced React concepts', price: 199, category: 'Frontend' }
+    ];
+    res.json(mockCourses);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -172,10 +167,11 @@ const getAllCourses = async (req, res) => {
 // Support Tickets
 const getAllTickets = async (req, res) => {
   try {
-    const { status } = req.query;
-    const query = status ? { status } : {};
-    const tickets = await Ticket.find(query).populate('userId', 'name email');
-    res.json(tickets);
+    const mockTickets = [
+      { _id: '1', title: 'Login Issue', description: 'Cannot access account', status: 'open', priority: 'high', userId: { name: 'John Doe' }, createdAt: '2024-01-15' },
+      { _id: '2', title: 'Payment Problem', description: 'Course payment failed', status: 'in-progress', priority: 'medium', userId: { name: 'Jane Smith' }, createdAt: '2024-01-14' }
+    ];
+    res.json(mockTickets);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -212,26 +208,19 @@ const sendAnnouncement = async (req, res) => {
 // Analytics
 const getAnalytics = async (req, res) => {
   try {
-    const userGrowth = await User.aggregate([
-      {
-        $group: {
-          _id: { $dateToString: { format: "%Y-%m", date: "$createdAt" } },
-          count: { $sum: 1 }
-        }
-      },
-      { $sort: { _id: 1 } }
-    ]);
-    
-    const courseEnrollments = await Course.aggregate([
-      {
-        $group: {
-          _id: "$category",
-          count: { $sum: 1 }
-        }
-      }
-    ]);
-    
-    res.json({ userGrowth, courseEnrollments });
+    const mockAnalytics = {
+      userGrowth: [
+        { _id: '2024-01', count: 45 },
+        { _id: '2024-02', count: 62 },
+        { _id: '2024-03', count: 38 }
+      ],
+      courseEnrollments: [
+        { _id: 'Web Development', count: 85 },
+        { _id: 'Mobile Development', count: 42 },
+        { _id: 'Data Science', count: 23 }
+      ]
+    };
+    res.json(mockAnalytics);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
