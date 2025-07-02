@@ -26,7 +26,7 @@ const Login = () => {
       if (result.isAdmin) {
         navigate('/admin/dashboard');
       } else {
-        navigate('/dashboard');
+        navigate('/user-dashboard');
       }
     } catch (error) {
       setError(error.message || "Invalid credentials");

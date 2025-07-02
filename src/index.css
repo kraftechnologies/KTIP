@@ -7,6 +7,10 @@
   animation: fadeIn 0.5s ease-in-out;
 }
 
+.dashboard-card {
+  @apply bg-white p-5 rounded-xl shadow hover:shadow-md border border-gray-200 flex flex-col items-center transition-transform transform hover:-translate-y-1;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
