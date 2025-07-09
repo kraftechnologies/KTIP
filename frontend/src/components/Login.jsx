@@ -38,6 +38,9 @@ const Login = () => {
           case 'support_admin':
             navigate('/admin/support');
             break;
+          case 'hr_admin':
+            navigate('/admin/hr');
+            break;
           default:
             navigate('/dashboard');
         }
@@ -92,6 +95,7 @@ const Login = () => {
           <p className="mb-2">Demo Credentials:</p>
           <p><strong>Super Admin:</strong> admin / admin123</p>
           <p><strong>Domain Admin:</strong> domain / admin123</p>
+          <p><strong>HR Admin:</strong> hradmin / admin123</p>
           <p><strong>Student:</strong> student / student123</p>
         </div>
       </div>

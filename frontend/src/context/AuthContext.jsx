@@ -106,6 +106,17 @@ export const AuthProvider = ({ children }) => {
             updateAuthState(userData);
             resolve({ success: true, ...userData });
           }
+          // HR admin credentials
+          else if (employeeId === "hradmin" && password === "admin123") {
+            const userData = {
+              isLoggedIn: true,
+              isAdmin: true,
+              userName: "HR Admin",
+              userRole: "hr_admin"
+            };
+            updateAuthState(userData);
+            resolve({ success: true, ...userData });
+          }
           // Student credentials
           else if (employeeId === "student" && password === "student123") {
             const userData = {

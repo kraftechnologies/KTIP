@@ -23,8 +23,16 @@ const Login = () => {
 
     try {
       const result = await login(employeeId, password);
-      if (result.isAdmin) {
-        navigate('/admin/dashboard');
+      if (result.userRole === 'super_admin') {
+        navigate('/admin/super');
+      } else if (result.userRole === 'domain_admin') {
+        navigate('/admin/domain');
+      } else if (result.userRole === 'evaluation_admin') {
+        navigate('/admin/evaluation');
+      } else if (result.userRole === 'support_admin') {
+        navigate('/admin/support');
+      } else if (result.userRole === 'hr_admin') {
+        navigate('/admin/hr');
       } else {
         navigate('/dashboard');
       }
@@ -75,6 +83,7 @@ const Login = () => {
         <div className="mt-4 text-center text-sm text-gray-600">
           <p className="mb-2">Demo Credentials:</p>
           <p><strong>Admin:</strong> admin / admin123</p>
+          <p><strong>HR Admin:</strong> hradmin / admin123</p>
           <p><strong>Student:</strong> student / student123</p>
         </div>
       </div>

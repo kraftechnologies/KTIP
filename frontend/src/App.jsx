@@ -32,6 +32,12 @@ import AdminManagement from "./pages/Admin/SuperAdmin/AdminManagement.jsx";
 import DomainAdminDashboard from "./pages/Admin/DomainAdmin/Dashboard.jsx";
 import EvaluationAdminDashboard from "./pages/Admin/EvaluationAdmin/Dashboard.jsx";
 import SupportAdminDashboard from "./pages/Admin/SupportAdmin/Dashboard.jsx";
+import HrAdminDashboard, { HRDashboardHome } from "./pages/Admin/HrAdmin/Dashboard.jsx";
+import EmployeeDirectory from "./pages/Admin/HrAdmin/EmployeeDirectory.jsx";
+import LeaveRequests from "./pages/Admin/HrAdmin/LeaveRequests.jsx";
+import Payroll from "./pages/Admin/HrAdmin/Payroll.jsx";
+import Performance from "./pages/Admin/HrAdmin/Performance.jsx";
+import Settings from "./pages/Admin/HrAdmin/Settings.jsx";
 
 import { AuthProvider } from "./context/AuthContext.jsx";
 
@@ -135,6 +141,18 @@ const App = () => {
                 <SupportAdminDashboard />
               </ProtectedRoute>
             } />
+            <Route path="/admin/hr" element={
+              <ProtectedRoute requiredRole="hr_admin">
+                <HrAdminDashboard />
+              </ProtectedRoute>
+            }>
+              <Route index element={<HRDashboardHome />} />
+              <Route path="employees" element={<EmployeeDirectory />} />
+              <Route path="leave-requests" element={<LeaveRequests />} />
+              <Route path="payroll" element={<Payroll />} />
+              <Route path="performance" element={<Performance />} />
+              <Route path="settings" element={<Settings />} />
+            </Route>
             
             <Route path="*" element={<ConstructionPage />} />
           </Routes>
